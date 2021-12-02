@@ -1,2 +1,6 @@
 *.pyc
 *.so
+
+__pycache__
+
+plugin/protoc
