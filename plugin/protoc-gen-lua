@@ -11,59 +11,74 @@
 # as listed at <url: http://www.opensource.org/licenses/bsd-license.php >.
 
 import sys
-import os.path as path
-from cStringIO import StringIO
+import os
+from io import StringIO
 
-import plugin_pb2
-import google.protobuf.descriptor_pb2 as descriptor_pb2
+import protoc.include.google.protobuf.compiler.plugin_pb2 as plugin_pb2
+import protoc.include.google.protobuf.descriptor_pb2 as descriptor_pb2
+
+import logging
+
+PWD = os.path.abspath(os.path.split(__file__)[0])
+
+DEBUG = True
+logging.basicConfig(filename=os.path.join(PWD, "log.txt"),
+                    level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+if not DEBUG:
+    logging.disable()
 
 _packages = {}
 _files = {}
 _message = {}
 
-FDP = plugin_pb2.descriptor_pb2.FieldDescriptorProto
+FDP = descriptor_pb2.FieldDescriptorProto
 
 if sys.platform == "win32":
-    import msvcrt, os
+    import msvcrt
+    import os
     msvcrt.setmode(sys.stdin.fileno(), os.O_BINARY)
     msvcrt.setmode(sys.stdout.fileno(), os.O_BINARY)
 
-class CppType:
-    CPPTYPE_INT32       = 1
-    CPPTYPE_INT64       = 2
-    CPPTYPE_UINT32      = 3
-    CPPTYPE_UINT64      = 4
-    CPPTYPE_DOUBLE      = 5
-    CPPTYPE_FLOAT       = 6
-    CPPTYPE_BOOL        = 7
-    CPPTYPE_ENUM        = 8
-    CPPTYPE_STRING      = 9
-    CPPTYPE_MESSAGE     = 10
 
-CPP_TYPE ={
-    FDP.TYPE_DOUBLE         : CppType.CPPTYPE_DOUBLE,
-    FDP.TYPE_FLOAT          : CppType.CPPTYPE_FLOAT,
-    FDP.TYPE_INT64          : CppType.CPPTYPE_INT64,
-    FDP.TYPE_UINT64         : CppType.CPPTYPE_UINT64,
-    FDP.TYPE_INT32          : CppType.CPPTYPE_INT32,
-    FDP.TYPE_FIXED64        : CppType.CPPTYPE_UINT64,
-    FDP.TYPE_FIXED32        : CppType.CPPTYPE_UINT32,
-    FDP.TYPE_BOOL           : CppType.CPPTYPE_BOOL,
-    FDP.TYPE_STRING         : CppType.CPPTYPE_STRING,
-    FDP.TYPE_MESSAGE        : CppType.CPPTYPE_MESSAGE,
-    FDP.TYPE_BYTES          : CppType.CPPTYPE_STRING,
-    FDP.TYPE_UINT32         : CppType.CPPTYPE_UINT32,
-    FDP.TYPE_ENUM           : CppType.CPPTYPE_ENUM,
-    FDP.TYPE_SFIXED32       : CppType.CPPTYPE_INT32,
-    FDP.TYPE_SFIXED64       : CppType.CPPTYPE_INT64,
-    FDP.TYPE_SINT32         : CppType.CPPTYPE_INT32,
-    FDP.TYPE_SINT64         : CppType.CPPTYPE_INT64
+class CppType:
+    CPPTYPE_INT32 = 1
+    CPPTYPE_INT64 = 2
+    CPPTYPE_UINT32 = 3
+    CPPTYPE_UINT64 = 4
+    CPPTYPE_DOUBLE = 5
+    CPPTYPE_FLOAT = 6
+    CPPTYPE_BOOL = 7
+    CPPTYPE_ENUM = 8
+    CPPTYPE_STRING = 9
+    CPPTYPE_MESSAGE = 10
+
+
+CPP_TYPE = {
+    FDP.TYPE_DOUBLE: CppType.CPPTYPE_DOUBLE,
+    FDP.TYPE_FLOAT: CppType.CPPTYPE_FLOAT,
+    FDP.TYPE_INT64: CppType.CPPTYPE_INT64,
+    FDP.TYPE_UINT64: CppType.CPPTYPE_UINT64,
+    FDP.TYPE_INT32: CppType.CPPTYPE_INT32,
+    FDP.TYPE_FIXED64: CppType.CPPTYPE_UINT64,
+    FDP.TYPE_FIXED32: CppType.CPPTYPE_UINT32,
+    FDP.TYPE_BOOL: CppType.CPPTYPE_BOOL,
+    FDP.TYPE_STRING: CppType.CPPTYPE_STRING,
+    FDP.TYPE_MESSAGE: CppType.CPPTYPE_MESSAGE,
+    FDP.TYPE_BYTES: CppType.CPPTYPE_STRING,
+    FDP.TYPE_UINT32: CppType.CPPTYPE_UINT32,
+    FDP.TYPE_ENUM: CppType.CPPTYPE_ENUM,
+    FDP.TYPE_SFIXED32: CppType.CPPTYPE_INT32,
+    FDP.TYPE_SFIXED64: CppType.CPPTYPE_INT64,
+    FDP.TYPE_SINT32: CppType.CPPTYPE_INT32,
+    FDP.TYPE_SINT64: CppType.CPPTYPE_INT64
 }
+
 
 def printerr(*args):
     sys.stderr.write(" ".join(args))
     sys.stderr.write("\n")
     sys.stderr.flush()
+
 
 class TreeNode(object):
     def __init__(self, name, parent=None, filename=None, package=None):
@@ -94,7 +109,7 @@ class TreeNode(object):
                 return i
         return None
 
-    def get_path(self, end = None):
+    def get_path(self, end=None):
         pos = self
         out = []
         while pos and pos != end:
@@ -120,10 +135,11 @@ class TreeNode(object):
     def __repr__(self):
         return str(self)
 
-    def to_string(self, indent = 0):
+    def to_string(self, indent=0):
         return ' '*indent + '<TreeNode ' + self.name + '(\n' + \
-                ','.join([i.to_string(indent + 4) for i in self.child]) + \
-                ' '*indent +')>\n'
+            ','.join([i.to_string(indent + 4) for i in self.child]) + \
+            ' '*indent + ')>\n'
+
 
 class Env(object):
     filename = None
@@ -133,6 +149,7 @@ class Env(object):
     message = None
     context = None
     register = None
+
     def __init__(self):
         self.message_tree = TreeNode('')
         self.scope = self.message_tree
@@ -218,6 +235,7 @@ class Env(object):
             parent = TreeNode(i, parent, self.filename, self.package)
         return parent
 
+
 class Writer(object):
     def __init__(self, prefix=None):
         self.io = StringIO()
@@ -240,31 +258,33 @@ class Writer(object):
             self.io.write(self.__prefix)
         self.io.write(data)
 
+
 DEFAULT_VALUE = {
-    FDP.TYPE_DOUBLE         : '0.0',
-    FDP.TYPE_FLOAT          : '0.0',
-    FDP.TYPE_INT64          : '0',
-    FDP.TYPE_UINT64         : '0',
-    FDP.TYPE_INT32          : '0',
-    FDP.TYPE_FIXED64        : '0',
-    FDP.TYPE_FIXED32        : '0',
-    FDP.TYPE_BOOL           : 'false',
-    FDP.TYPE_STRING         : '""',
-    FDP.TYPE_MESSAGE        : 'nil',
-    FDP.TYPE_BYTES          : '""',
-    FDP.TYPE_UINT32         : '0',
-    FDP.TYPE_ENUM           : '1',
-    FDP.TYPE_SFIXED32       : '0',
-    FDP.TYPE_SFIXED64       : '0',
-    FDP.TYPE_SINT32         : '0',
-    FDP.TYPE_SINT64         : '0',
+    FDP.TYPE_DOUBLE: '0.0',
+    FDP.TYPE_FLOAT: '0.0',
+    FDP.TYPE_INT64: '0',
+    FDP.TYPE_UINT64: '0',
+    FDP.TYPE_INT32: '0',
+    FDP.TYPE_FIXED64: '0',
+    FDP.TYPE_FIXED32: '0',
+    FDP.TYPE_BOOL: 'false',
+    FDP.TYPE_STRING: '""',
+    FDP.TYPE_MESSAGE: 'nil',
+    FDP.TYPE_BYTES: '""',
+    FDP.TYPE_UINT32: '0',
+    FDP.TYPE_ENUM: '1',
+    FDP.TYPE_SFIXED32: '0',
+    FDP.TYPE_SFIXED64: '0',
+    FDP.TYPE_SINT32: '0',
+    FDP.TYPE_SINT64: '0',
 }
+
 
 def code_gen_enum_item(index, enum_value, env):
     full_name = env.get_local_name() + '.' + enum_value.name
     obj_name = full_name.upper().replace('.', '_') + '_ENUM'
     env.descriptor.append(
-        "%s = protobuf.EnumValueDescriptor();\n"% obj_name
+        "%s = protobuf.EnumValueDescriptor();\n" % obj_name
     )
 
     context = Writer(obj_name)
@@ -275,12 +295,13 @@ def code_gen_enum_item(index, enum_value, env):
     env.context.append(context.getvalue())
     return obj_name
 
+
 def code_gen_enum(enum_desc, env):
     env.enter(enum_desc.name)
     full_name = env.get_local_name()
     obj_name = full_name.upper().replace('.', '_')
     env.descriptor.append(
-        "%s = protobuf.EnumDescriptor();\n"% obj_name
+        "%s = protobuf.EnumDescriptor();\n" % obj_name
     )
 
     context = Writer(obj_name)
@@ -296,11 +317,12 @@ def code_gen_enum(enum_desc, env):
     env.exit()
     return obj_name
 
+
 def code_gen_field(index, field_desc, env):
     full_name = env.get_local_name() + '.' + field_desc.name
     obj_name = full_name.upper().replace('.', '_') + '_FIELD'
     env.descriptor.append(
-        "%s = protobuf.FieldDescriptor();\n"% obj_name
+        "%s = protobuf.FieldDescriptor();\n" % obj_name
     )
 
     context = Writer(obj_name)
@@ -316,9 +338,9 @@ def code_gen_field(index, field_desc, env):
         context('.has_default_value = true\n')
         value = field_desc.default_value
         if field_desc.type == FDP.TYPE_STRING:
-            context('.default_value = "%s"\n'%value)
+            context('.default_value = "%s"\n' % value)
         else:
-            context('.default_value = %s\n'%value)
+            context('.default_value = %s\n' % value)
     else:
         context('.has_default_value = false\n')
         if field_desc.label == FDP.LABEL_REPEATED:
@@ -347,12 +369,13 @@ def code_gen_field(index, field_desc, env):
     env.context.append(context.getvalue())
     return obj_name
 
-def code_gen_message(message_descriptor, env, containing_type = None):
+
+def code_gen_message(message_descriptor : descriptor_pb2.DescriptorProto, env : TreeNode, containing_type : bool = None):
     env.enter(message_descriptor.name)
     full_name = env.get_local_name()
     obj_name = full_name.upper().replace('.', '_')
     env.descriptor.append(
-        "%s = protobuf.Descriptor();\n"% obj_name
+        "%s = protobuf.Descriptor();\n" % obj_name
     )
 
     context = Writer(obj_name)
@@ -395,70 +418,78 @@ def code_gen_message(message_descriptor, env, containing_type = None):
     env.exit()
     return obj_name
 
+
 def write_header(writer):
     writer("""--Generated By protoc-gen-lua Do not Edit
 """)
 
-def code_gen_file(proto_file, env, is_gen):
-    filename = path.splitext(proto_file.name)[0]
+
+def code_gen_file(proto_file: descriptor_pb2.FileDescriptorProto, env: TreeNode, is_gen: bool):
+    logging.info(f"开始解析{proto_file.name}")
+    filename = os.path.splitext(proto_file.name)[0]
     env.enter_file(filename, proto_file.package)
 
     includes = []
     for f in proto_file.dependency:
-        inc_file = path.splitext(f)[0]
+        inc_file = os.path.splitext(f)[0]
         includes.append(inc_file)
 
-#    for field_desc in proto_file.extension:
-#        code_gen_extensions(field_desc, field_desc.name, env)
-
     for enum_desc in proto_file.enum_type:
+        logging.debug(enum_desc)
         code_gen_enum(enum_desc, env)
         for enum_value in enum_desc.value:
             env.message.append('%s = %d\n' % (enum_value.name,
                                               enum_value.number))
 
     for msg_desc in proto_file.message_type:
+        logging.debug(msg_desc)
         code_gen_message(msg_desc, env)
 
+    
     if is_gen:
         lua = Writer()
         write_header(lua)
         lua('local protobuf = require "protobuf.protobuf"\n')
         for i in includes:
-            lua('local %s_pb = require("Protol.%s_pb")\n' % (i, i))
-        lua("module('Protol.%s_pb')" % env.filename)
-
+            module_name = i.split("/")
+            lua(f'local {module_name[-1]}_pb = require("{".".join(module_name)}_pb")\n')
+        module_name = env.filename.split("/")
+        lua(f"module('{'.'.join(module_name)}_pb')")
+        
         lua('\n\n')
-        map(lua, env.descriptor)
+        for it in env.descriptor:
+            lua(it)
         lua('\n')
-        map(lua, env.context)
+        for it in env.context:
+            lua(it)
         lua('\n')
-        env.message.sort()
-        map(lua, env.message)
+        for it in env.message:
+            lua(it)
         lua('\n')
-        map(lua, env.register)
+        for it in env.register:
+            lua(it)
 
-        _files[env.filename+ '_pb.lua'] = lua.getvalue()
+        content = lua.getvalue()
+        _files[env.filename + '_pb.lua'] = content
+        logging.debug(content)
+        
     env.exit_file()
 
-def main():
-    plugin_require_bin = sys.stdin.read()
+
+if __name__ == "__main__":
+    plugin_require_bin = sys.stdin.buffer.read()
     code_gen_req = plugin_pb2.CodeGeneratorRequest()
     code_gen_req.ParseFromString(plugin_require_bin)
 
     env = Env()
     for proto_file in code_gen_req.proto_file:
         code_gen_file(proto_file, env,
-                proto_file.name in code_gen_req.file_to_generate)
+                      proto_file.name in code_gen_req.file_to_generate)
 
     code_generated = plugin_pb2.CodeGeneratorResponse()
-    for k in  _files:
+    for k in _files:
         file_desc = code_generated.file.add()
         file_desc.name = k
         file_desc.content = _files[k]
 
-    sys.stdout.write(code_generated.SerializeToString())
-
-if __name__ == "__main__":
-    main()
-
+    sys.stdout.buffer.write(code_generated.SerializeToString())
