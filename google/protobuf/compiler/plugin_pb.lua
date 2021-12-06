@@ -12,8 +12,8 @@ google_protobuf_compiler_plugin_pb.Version = {
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_compiler_plugin_pb.CodeGeneratorRequest = {
@@ -26,16 +26,16 @@ google_protobuf_compiler_plugin_pb.CodeGeneratorRequest = {
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_compiler_plugin_pb.CodeGeneratorResponse = {
     Feature = {
         FEATURE_NONE = 0,
         FEATURE_PROTO3_OPTIONAL = 1,
-    }
-,
+    },
+
     File = {
         __call__ = function ()
             local message = {
@@ -46,10 +46,10 @@ google_protobuf_compiler_plugin_pb.CodeGeneratorResponse = {
             }
 
             return message
-        end
-,
-    }
-,
+        end,
+
+    },
+
     __call__ = function ()
         local message = {
             error = "",
@@ -58,8 +58,8 @@ google_protobuf_compiler_plugin_pb.CodeGeneratorResponse = {
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 return google_protobuf_compiler_plugin_pb

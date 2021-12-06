@@ -8,8 +8,8 @@ google_protobuf_source_context_pb.SourceContext = {
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 return google_protobuf_source_context_pb

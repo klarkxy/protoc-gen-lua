@@ -9,8 +9,8 @@ google_protobuf_timestamp_pb.Timestamp = {
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 return google_protobuf_timestamp_pb

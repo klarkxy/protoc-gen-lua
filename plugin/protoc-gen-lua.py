@@ -33,6 +33,7 @@ def get_module_name(proto_path : str) -> str:
     return "_".join(local.split("/"))
 
 lua_type_name = {}
+lua_value_name = {}
 
 def declare(proto: descriptor_pb2.DescriptorProto | descriptor_pb2.EnumDescriptorProto | descriptor_pb2.FileDescriptorProto, proto_type: str, lua_type: str) -> None:
     """对整个DescriptorProto进行扫描"""
@@ -68,10 +69,10 @@ class lua(object):
             log(f"Requiring {require}")
             module = get_module_name(require)
             require_path = os.path.splitext(require)[0] + "_pb"
-            require_path = '.'.join(require_path.split("/"))
-            self.p(f"local {module} = require \"{require_path}\"")
+            require_path = '.'.join(require_path.split("/"))    
+            self.p(f"local {module} = require \"{require_path}\"")   
 
-    def generate(self, proto: descriptor_pb2.DescriptorProto | descriptor_pb2.EnumDescriptorProto) -> dict:
+    def generate(self, proto: descriptor_pb2.DescriptorProto | descriptor_pb2.EnumDescriptorProto, prefix = []) -> dict:
         log(f"Generating '{proto.name}'")
         # 生成Enum
         if isinstance(proto, descriptor_pb2.EnumDescriptorProto):
@@ -83,10 +84,10 @@ class lua(object):
         msg = {}
         # 描述所有Enum
         for enum in proto.enum_type:
-            msg[enum.name] = self.generate(enum)
+            msg[enum.name] = self.generate(enum, [*prefix, proto.name])
         # 描述所有Message
         for message in proto.nested_type:
-            msg[message.name] = self.generate(message)
+            msg[message.name] = self.generate(message, [*prefix, proto.name])
         # 描述这个Message的构造
         fields = {}
         for field in proto.field:
@@ -100,11 +101,12 @@ class lua(object):
                         fields[field.name] = caller(lua_type_name[field.type_name])
                     case descriptor_pb2.FieldDescriptorProto.Type.TYPE_STRING:
                         fields[field.name] = ""
+                    case descriptor_pb2.FieldDescriptorProto.Type.TYPE_BOOL:
+                        fields[field.name] = False
                     case _:
                         fields[field.name] = 0
-        msg["__call__"] = functional([], assignment("local message", fields), "return message")
+        msg[f"__call__"] = functional([], assignment("local message", fields), "return message")
         return msg
-        
 
     def gen_file(self, need_generate: bool) -> str | None:
         log(f"--- Generating '{self.local}' ---")
@@ -118,7 +120,7 @@ class lua(object):
             self.p(assignment(f"{self.local}.{enum.name}", self.generate(enum)))
         # 描述所有全局Message
         for message in self.file.message_type:
-            self.p(assignment(f"{self.local}.{message.name}", self.generate(message)))                
+            self.p(assignment(f"{self.local}.{message.name}", self.generate(message)))   
         # 结尾返回这个包
         self.p(f"return {self.local}")
         # 如果需要打印，那就打印出来

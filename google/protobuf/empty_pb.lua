@@ -5,8 +5,8 @@ google_protobuf_empty_pb.Empty = {
     __call__ = function ()
         local message = {}
         return message
-    end
-,
+    end,
+
 }
 
 return google_protobuf_empty_pb

@@ -8,8 +8,8 @@ google_protobuf_descriptor_pb.FileDescriptorSet = {
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_descriptor_pb.FileDescriptorProto = {
@@ -30,8 +30,8 @@ google_protobuf_descriptor_pb.FileDescriptorProto = {
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_descriptor_pb.DescriptorProto = {
@@ -44,10 +44,10 @@ google_protobuf_descriptor_pb.DescriptorProto = {
             }
 
             return message
-        end
-,
-    }
-,
+        end,
+
+    },
+
     ReservedRange = {
         __call__ = function ()
             local message = {
@@ -56,10 +56,10 @@ google_protobuf_descriptor_pb.DescriptorProto = {
             }
 
             return message
-        end
-,
-    }
-,
+        end,
+
+    },
+
     __call__ = function ()
         local message = {
             name = "",
@@ -75,8 +75,8 @@ google_protobuf_descriptor_pb.DescriptorProto = {
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_descriptor_pb.ExtensionRangeOptions = {
@@ -86,8 +86,8 @@ google_protobuf_descriptor_pb.ExtensionRangeOptions = {
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_descriptor_pb.FieldDescriptorProto = {
@@ -110,14 +110,14 @@ google_protobuf_descriptor_pb.FieldDescriptorProto = {
         TYPE_SFIXED64 = 16,
         TYPE_SINT32 = 17,
         TYPE_SINT64 = 18,
-    }
-,
+    },
+
     Label = {
         LABEL_OPTIONAL = 1,
         LABEL_REQUIRED = 2,
         LABEL_REPEATED = 3,
-    }
-,
+    },
+
     __call__ = function ()
         local message = {
             name = "",
@@ -130,12 +130,12 @@ google_protobuf_descriptor_pb.FieldDescriptorProto = {
             oneof_index = 0,
             json_name = "",
             options = google_protobuf_descriptor_pb.FieldOptions(),
-            proto3_optional = 0,
+            proto3_optional = false,
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_descriptor_pb.OneofDescriptorProto = {
@@ -146,8 +146,8 @@ google_protobuf_descriptor_pb.OneofDescriptorProto = {
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_descriptor_pb.EnumDescriptorProto = {
@@ -159,10 +159,10 @@ google_protobuf_descriptor_pb.EnumDescriptorProto = {
             }
 
             return message
-        end
-,
-    }
-,
+        end,
+
+    },
+
     __call__ = function ()
         local message = {
             name = "",
@@ -173,8 +173,8 @@ google_protobuf_descriptor_pb.EnumDescriptorProto = {
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_descriptor_pb.EnumValueDescriptorProto = {
@@ -186,8 +186,8 @@ google_protobuf_descriptor_pb.EnumValueDescriptorProto = {
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_descriptor_pb.ServiceDescriptorProto = {
@@ -199,8 +199,8 @@ google_protobuf_descriptor_pb.ServiceDescriptorProto = {
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_descriptor_pb.MethodDescriptorProto = {
@@ -210,13 +210,13 @@ google_protobuf_descriptor_pb.MethodDescriptorProto = {
             input_type = "",
             output_type = "",
             options = google_protobuf_descriptor_pb.MethodOptions(),
-            client_streaming = 0,
-            server_streaming = 0,
+            client_streaming = false,
+            server_streaming = false,
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_descriptor_pb.FileOptions = {
@@ -224,23 +224,23 @@ google_protobuf_descriptor_pb.FileOptions = {
         SPEED = 1,
         CODE_SIZE = 2,
         LITE_RUNTIME = 3,
-    }
-,
+    },
+
     __call__ = function ()
         local message = {
             java_package = "",
             java_outer_classname = "",
-            java_multiple_files = 0,
-            java_generate_equals_and_hash = 0,
-            java_string_check_utf8 = 0,
+            java_multiple_files = false,
+            java_generate_equals_and_hash = false,
+            java_string_check_utf8 = false,
             optimize_for = 0,
             go_package = "",
-            cc_generic_services = 0,
-            java_generic_services = 0,
-            py_generic_services = 0,
-            php_generic_services = 0,
-            deprecated = 0,
-            cc_enable_arenas = 0,
+            cc_generic_services = false,
+            java_generic_services = false,
+            py_generic_services = false,
+            php_generic_services = false,
+            deprecated = false,
+            cc_enable_arenas = false,
             objc_class_prefix = "",
             csharp_namespace = "",
             swift_prefix = "",
@@ -252,23 +252,23 @@ google_protobuf_descriptor_pb.FileOptions = {
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_descriptor_pb.MessageOptions = {
     __call__ = function ()
         local message = {
-            message_set_wire_format = 0,
-            no_standard_descriptor_accessor = 0,
-            deprecated = 0,
-            map_entry = 0,
+            message_set_wire_format = false,
+            no_standard_descriptor_accessor = false,
+            deprecated = false,
+            map_entry = false,
             uninterpreted_option = {},
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_descriptor_pb.FieldOptions = {
@@ -276,28 +276,28 @@ google_protobuf_descriptor_pb.FieldOptions = {
         STRING = 0,
         CORD = 1,
         STRING_PIECE = 2,
-    }
-,
+    },
+
     JSType = {
         JS_NORMAL = 0,
         JS_STRING = 1,
         JS_NUMBER = 2,
-    }
-,
+    },
+
     __call__ = function ()
         local message = {
             ctype = 0,
-            packed = 0,
+            packed = false,
             jstype = 0,
-            lazy = 0,
-            deprecated = 0,
-            weak = 0,
+            lazy = false,
+            deprecated = false,
+            weak = false,
             uninterpreted_option = {},
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_descriptor_pb.OneofOptions = {
@@ -307,45 +307,45 @@ google_protobuf_descriptor_pb.OneofOptions = {
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_descriptor_pb.EnumOptions = {
     __call__ = function ()
         local message = {
-            allow_alias = 0,
-            deprecated = 0,
+            allow_alias = false,
+            deprecated = false,
             uninterpreted_option = {},
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_descriptor_pb.EnumValueOptions = {
     __call__ = function ()
         local message = {
-            deprecated = 0,
+            deprecated = false,
             uninterpreted_option = {},
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_descriptor_pb.ServiceOptions = {
     __call__ = function ()
         local message = {
-            deprecated = 0,
+            deprecated = false,
             uninterpreted_option = {},
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_descriptor_pb.MethodOptions = {
@@ -353,18 +353,18 @@ google_protobuf_descriptor_pb.MethodOptions = {
         IDEMPOTENCY_UNKNOWN = 0,
         NO_SIDE_EFFECTS = 1,
         IDEMPOTENT = 2,
-    }
-,
+    },
+
     __call__ = function ()
         local message = {
-            deprecated = 0,
+            deprecated = false,
             idempotency_level = 0,
             uninterpreted_option = {},
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_descriptor_pb.UninterpretedOption = {
@@ -372,14 +372,14 @@ google_protobuf_descriptor_pb.UninterpretedOption = {
         __call__ = function ()
             local message = {
                 name_part = "",
-                is_extension = 0,
+                is_extension = false,
             }
 
             return message
-        end
-,
-    }
-,
+        end,
+
+    },
+
     __call__ = function ()
         local message = {
             name = {},
@@ -392,8 +392,8 @@ google_protobuf_descriptor_pb.UninterpretedOption = {
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_descriptor_pb.SourceCodeInfo = {
@@ -408,18 +408,18 @@ google_protobuf_descriptor_pb.SourceCodeInfo = {
             }
 
             return message
-        end
-,
-    }
-,
+        end,
+
+    },
+
     __call__ = function ()
         local message = {
             location = {},
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_descriptor_pb.GeneratedCodeInfo = {
@@ -433,18 +433,18 @@ google_protobuf_descriptor_pb.GeneratedCodeInfo = {
             }
 
             return message
-        end
-,
-    }
-,
+        end,
+
+    },
+
     __call__ = function ()
         local message = {
             annotation = {},
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 return google_protobuf_descriptor_pb

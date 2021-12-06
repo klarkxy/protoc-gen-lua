@@ -9,8 +9,8 @@ google_protobuf_any_pb.Any = {
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 return google_protobuf_any_pb

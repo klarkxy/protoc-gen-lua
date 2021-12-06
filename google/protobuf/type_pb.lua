@@ -20,8 +20,8 @@ google_protobuf_type_pb.Type = {
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_type_pb.Field = {
@@ -45,15 +45,15 @@ google_protobuf_type_pb.Field = {
         TYPE_SFIXED64 = 16,
         TYPE_SINT32 = 17,
         TYPE_SINT64 = 18,
-    }
-,
+    },
+
     Cardinality = {
         CARDINALITY_UNKNOWN = 0,
         CARDINALITY_OPTIONAL = 1,
         CARDINALITY_REQUIRED = 2,
         CARDINALITY_REPEATED = 3,
-    }
-,
+    },
+
     __call__ = function ()
         local message = {
             kind = 0,
@@ -62,15 +62,15 @@ google_protobuf_type_pb.Field = {
             name = "",
             type_url = "",
             oneof_index = 0,
-            packed = 0,
+            packed = false,
             options = {},
             json_name = "",
             default_value = "",
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_type_pb.Enum = {
@@ -84,8 +84,8 @@ google_protobuf_type_pb.Enum = {
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_type_pb.EnumValue = {
@@ -97,8 +97,8 @@ google_protobuf_type_pb.EnumValue = {
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_type_pb.Option = {
@@ -109,8 +109,8 @@ google_protobuf_type_pb.Option = {
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 return google_protobuf_type_pb

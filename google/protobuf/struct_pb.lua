@@ -14,18 +14,18 @@ google_protobuf_struct_pb.Struct = {
             }
 
             return message
-        end
-,
-    }
-,
+        end,
+
+    },
+
     __call__ = function ()
         local message = {
             fields = {},
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_struct_pb.Value = {
@@ -34,14 +34,14 @@ google_protobuf_struct_pb.Value = {
             null_value = 0,
             number_value = 0,
             string_value = "",
-            bool_value = 0,
+            bool_value = false,
             struct_value = google_protobuf_struct_pb.Struct(),
             list_value = google_protobuf_struct_pb.ListValue(),
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_struct_pb.ListValue = {
@@ -51,8 +51,8 @@ google_protobuf_struct_pb.ListValue = {
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 return google_protobuf_struct_pb

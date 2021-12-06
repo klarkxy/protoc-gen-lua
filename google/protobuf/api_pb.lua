@@ -16,8 +16,8 @@ google_protobuf_api_pb.Api = {
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_api_pb.Method = {
@@ -25,16 +25,16 @@ google_protobuf_api_pb.Method = {
         local message = {
             name = "",
             request_type_url = "",
-            request_streaming = 0,
+            request_streaming = false,
             response_type_url = "",
-            response_streaming = 0,
+            response_streaming = false,
             options = {},
             syntax = 0,
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_api_pb.Mixin = {
@@ -45,8 +45,8 @@ google_protobuf_api_pb.Mixin = {
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 return google_protobuf_api_pb

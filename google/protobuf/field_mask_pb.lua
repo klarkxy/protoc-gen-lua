@@ -8,8 +8,8 @@ google_protobuf_field_mask_pb.FieldMask = {
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 return google_protobuf_field_mask_pb

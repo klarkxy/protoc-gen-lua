@@ -9,8 +9,8 @@ google_protobuf_duration_pb.Duration = {
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 return google_protobuf_duration_pb

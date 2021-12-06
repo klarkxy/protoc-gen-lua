@@ -8,8 +8,8 @@ google_protobuf_wrappers_pb.DoubleValue = {
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_wrappers_pb.FloatValue = {
@@ -19,8 +19,8 @@ google_protobuf_wrappers_pb.FloatValue = {
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_wrappers_pb.Int64Value = {
@@ -30,8 +30,8 @@ google_protobuf_wrappers_pb.Int64Value = {
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_wrappers_pb.UInt64Value = {
@@ -41,8 +41,8 @@ google_protobuf_wrappers_pb.UInt64Value = {
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_wrappers_pb.Int32Value = {
@@ -52,8 +52,8 @@ google_protobuf_wrappers_pb.Int32Value = {
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_wrappers_pb.UInt32Value = {
@@ -63,19 +63,19 @@ google_protobuf_wrappers_pb.UInt32Value = {
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_wrappers_pb.BoolValue = {
     __call__ = function ()
         local message = {
-            value = 0,
+            value = false,
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_wrappers_pb.StringValue = {
@@ -85,8 +85,8 @@ google_protobuf_wrappers_pb.StringValue = {
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 google_protobuf_wrappers_pb.BytesValue = {
@@ -96,8 +96,8 @@ google_protobuf_wrappers_pb.BytesValue = {
         }
 
         return message
-    end
-,
+    end,
+
 }
 
 return google_protobuf_wrappers_pb
