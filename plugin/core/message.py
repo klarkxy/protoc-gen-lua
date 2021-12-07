@@ -60,7 +60,7 @@ class Field(Base):
     
     def descripte(self, s : Writer):
         log(f"Descripte Field '{self.proto_name}'")
-        s.p(f"{self.lua_name}.Descriptor = {{")
+        s.p(f"{self.lua_name.split('.')[-1]} = {{")
         with s:
             s.p(f"name = \"{self.proto_name}\",")
             s.p(f"number = {self.proto.number},")
@@ -74,7 +74,7 @@ class Field(Base):
             with s:
                 s.p(f"packed = {'true' if self.proto.options.packed else 'false'},")
             s.p("}")
-        s.p("}")
+        s.p("},")
 
 
 class Message(Base):
@@ -117,15 +117,13 @@ class Message(Base):
             enm.descripte(s)
         for message in self.messages:
             message.descripte(s)
-        for field in self.fields:
-            field.descripte(s)
         s.p(f"{self.lua_name}.Descriptor = {{")
         with s:
             s.p(f"name = \"{self.proto_name}\",")
             s.p(f"field = {{")
             with s:
                 for field in self.fields:
-                    s.p(f"{field.lua_name}.Descriptor,")
+                    field.descripte(s)
             s.p("},")
             if len(self.proto.oneof_decl) > 0:
                 s.p(f"oneof_decl = {{")

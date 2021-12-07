@@ -13,19 +13,18 @@ end
 ----------------- Descriptor -----------------
 
 local google_protobuf_descriptor_pb = require "google/protobuf/descriptor_pb"
-google_protobuf_source_context_pb.SourceContext.file_name.Descriptor = {
-    name = ".google.protobuf.SourceContext.file_name",
-    number = 1,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_STRING,
-    options = {
-        packed = false,
-    }
-}
 google_protobuf_source_context_pb.SourceContext.Descriptor = {
     name = ".google.protobuf.SourceContext",
     field = {
-        google_protobuf_source_context_pb.SourceContext.file_name.Descriptor,
+        file_name = {
+            name = ".google.protobuf.SourceContext.file_name",
+            number = 1,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_STRING,
+            options = {
+                packed = false,
+            }
+        },
     },
 }
 google_protobuf_source_context_pb.Descriptor = {

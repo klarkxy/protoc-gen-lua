@@ -14,29 +14,27 @@ end
 ----------------- Descriptor -----------------
 
 local google_protobuf_descriptor_pb = require "google/protobuf/descriptor_pb"
-google_protobuf_timestamp_pb.Timestamp.seconds.Descriptor = {
-    name = ".google.protobuf.Timestamp.seconds",
-    number = 1,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_INT64,
-    options = {
-        packed = false,
-    }
-}
-google_protobuf_timestamp_pb.Timestamp.nanos.Descriptor = {
-    name = ".google.protobuf.Timestamp.nanos",
-    number = 2,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_INT32,
-    options = {
-        packed = false,
-    }
-}
 google_protobuf_timestamp_pb.Timestamp.Descriptor = {
     name = ".google.protobuf.Timestamp",
     field = {
-        google_protobuf_timestamp_pb.Timestamp.seconds.Descriptor,
-        google_protobuf_timestamp_pb.Timestamp.nanos.Descriptor,
+        seconds = {
+            name = ".google.protobuf.Timestamp.seconds",
+            number = 1,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_INT64,
+            options = {
+                packed = false,
+            }
+        },
+        nanos = {
+            name = ".google.protobuf.Timestamp.nanos",
+            number = 2,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_INT32,
+            options = {
+                packed = false,
+            }
+        },
     },
 }
 google_protobuf_timestamp_pb.Descriptor = {

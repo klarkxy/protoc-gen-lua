@@ -69,139 +69,130 @@ end
 ----------------- Descriptor -----------------
 
 local google_protobuf_descriptor_pb = require "google/protobuf/descriptor_pb"
-google_protobuf_wrappers_pb.DoubleValue.value.Descriptor = {
-    name = ".google.protobuf.DoubleValue.value",
-    number = 1,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_DOUBLE,
-    options = {
-        packed = false,
-    }
-}
 google_protobuf_wrappers_pb.DoubleValue.Descriptor = {
     name = ".google.protobuf.DoubleValue",
     field = {
-        google_protobuf_wrappers_pb.DoubleValue.value.Descriptor,
+        value = {
+            name = ".google.protobuf.DoubleValue.value",
+            number = 1,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_DOUBLE,
+            options = {
+                packed = false,
+            }
+        },
     },
-}
-google_protobuf_wrappers_pb.FloatValue.value.Descriptor = {
-    name = ".google.protobuf.FloatValue.value",
-    number = 1,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_FLOAT,
-    options = {
-        packed = false,
-    }
 }
 google_protobuf_wrappers_pb.FloatValue.Descriptor = {
     name = ".google.protobuf.FloatValue",
     field = {
-        google_protobuf_wrappers_pb.FloatValue.value.Descriptor,
+        value = {
+            name = ".google.protobuf.FloatValue.value",
+            number = 1,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_FLOAT,
+            options = {
+                packed = false,
+            }
+        },
     },
-}
-google_protobuf_wrappers_pb.Int64Value.value.Descriptor = {
-    name = ".google.protobuf.Int64Value.value",
-    number = 1,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_INT64,
-    options = {
-        packed = false,
-    }
 }
 google_protobuf_wrappers_pb.Int64Value.Descriptor = {
     name = ".google.protobuf.Int64Value",
     field = {
-        google_protobuf_wrappers_pb.Int64Value.value.Descriptor,
+        value = {
+            name = ".google.protobuf.Int64Value.value",
+            number = 1,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_INT64,
+            options = {
+                packed = false,
+            }
+        },
     },
-}
-google_protobuf_wrappers_pb.UInt64Value.value.Descriptor = {
-    name = ".google.protobuf.UInt64Value.value",
-    number = 1,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_UINT64,
-    options = {
-        packed = false,
-    }
 }
 google_protobuf_wrappers_pb.UInt64Value.Descriptor = {
     name = ".google.protobuf.UInt64Value",
     field = {
-        google_protobuf_wrappers_pb.UInt64Value.value.Descriptor,
+        value = {
+            name = ".google.protobuf.UInt64Value.value",
+            number = 1,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_UINT64,
+            options = {
+                packed = false,
+            }
+        },
     },
-}
-google_protobuf_wrappers_pb.Int32Value.value.Descriptor = {
-    name = ".google.protobuf.Int32Value.value",
-    number = 1,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_INT32,
-    options = {
-        packed = false,
-    }
 }
 google_protobuf_wrappers_pb.Int32Value.Descriptor = {
     name = ".google.protobuf.Int32Value",
     field = {
-        google_protobuf_wrappers_pb.Int32Value.value.Descriptor,
+        value = {
+            name = ".google.protobuf.Int32Value.value",
+            number = 1,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_INT32,
+            options = {
+                packed = false,
+            }
+        },
     },
-}
-google_protobuf_wrappers_pb.UInt32Value.value.Descriptor = {
-    name = ".google.protobuf.UInt32Value.value",
-    number = 1,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_UINT32,
-    options = {
-        packed = false,
-    }
 }
 google_protobuf_wrappers_pb.UInt32Value.Descriptor = {
     name = ".google.protobuf.UInt32Value",
     field = {
-        google_protobuf_wrappers_pb.UInt32Value.value.Descriptor,
+        value = {
+            name = ".google.protobuf.UInt32Value.value",
+            number = 1,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_UINT32,
+            options = {
+                packed = false,
+            }
+        },
     },
-}
-google_protobuf_wrappers_pb.BoolValue.value.Descriptor = {
-    name = ".google.protobuf.BoolValue.value",
-    number = 1,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_BOOL,
-    options = {
-        packed = false,
-    }
 }
 google_protobuf_wrappers_pb.BoolValue.Descriptor = {
     name = ".google.protobuf.BoolValue",
     field = {
-        google_protobuf_wrappers_pb.BoolValue.value.Descriptor,
+        value = {
+            name = ".google.protobuf.BoolValue.value",
+            number = 1,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_BOOL,
+            options = {
+                packed = false,
+            }
+        },
     },
-}
-google_protobuf_wrappers_pb.StringValue.value.Descriptor = {
-    name = ".google.protobuf.StringValue.value",
-    number = 1,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_STRING,
-    options = {
-        packed = false,
-    }
 }
 google_protobuf_wrappers_pb.StringValue.Descriptor = {
     name = ".google.protobuf.StringValue",
     field = {
-        google_protobuf_wrappers_pb.StringValue.value.Descriptor,
+        value = {
+            name = ".google.protobuf.StringValue.value",
+            number = 1,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_STRING,
+            options = {
+                packed = false,
+            }
+        },
     },
-}
-google_protobuf_wrappers_pb.BytesValue.value.Descriptor = {
-    name = ".google.protobuf.BytesValue.value",
-    number = 1,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_BYTES,
-    options = {
-        packed = false,
-    }
 }
 google_protobuf_wrappers_pb.BytesValue.Descriptor = {
     name = ".google.protobuf.BytesValue",
     field = {
-        google_protobuf_wrappers_pb.BytesValue.value.Descriptor,
+        value = {
+            name = ".google.protobuf.BytesValue.value",
+            number = 1,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_BYTES,
+            options = {
+                packed = false,
+            }
+        },
     },
 }
 google_protobuf_wrappers_pb.Descriptor = {

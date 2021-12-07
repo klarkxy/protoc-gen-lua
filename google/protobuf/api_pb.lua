@@ -42,186 +42,170 @@ end
 ----------------- Descriptor -----------------
 
 local google_protobuf_descriptor_pb = require "google/protobuf/descriptor_pb"
-google_protobuf_api_pb.Api.name.Descriptor = {
-    name = ".google.protobuf.Api.name",
-    number = 1,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_STRING,
-    options = {
-        packed = false,
-    }
-}
-google_protobuf_api_pb.Api.methods.Descriptor = {
-    name = ".google.protobuf.Api.methods",
-    number = 2,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_REPEATED,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_MESSAGE,
-    type_name = ".google.protobuf.Method",
-    options = {
-        packed = false,
-    }
-}
-google_protobuf_api_pb.Api.options.Descriptor = {
-    name = ".google.protobuf.Api.options",
-    number = 3,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_REPEATED,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_MESSAGE,
-    type_name = ".google.protobuf.Option",
-    options = {
-        packed = false,
-    }
-}
-google_protobuf_api_pb.Api.version.Descriptor = {
-    name = ".google.protobuf.Api.version",
-    number = 4,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_STRING,
-    options = {
-        packed = false,
-    }
-}
-google_protobuf_api_pb.Api.source_context.Descriptor = {
-    name = ".google.protobuf.Api.source_context",
-    number = 5,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_MESSAGE,
-    type_name = ".google.protobuf.SourceContext",
-    options = {
-        packed = false,
-    }
-}
-google_protobuf_api_pb.Api.mixins.Descriptor = {
-    name = ".google.protobuf.Api.mixins",
-    number = 6,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_REPEATED,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_MESSAGE,
-    type_name = ".google.protobuf.Mixin",
-    options = {
-        packed = false,
-    }
-}
-google_protobuf_api_pb.Api.syntax.Descriptor = {
-    name = ".google.protobuf.Api.syntax",
-    number = 7,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_ENUM,
-    type_name = ".google.protobuf.Syntax",
-    options = {
-        packed = false,
-    }
-}
 google_protobuf_api_pb.Api.Descriptor = {
     name = ".google.protobuf.Api",
     field = {
-        google_protobuf_api_pb.Api.name.Descriptor,
-        google_protobuf_api_pb.Api.methods.Descriptor,
-        google_protobuf_api_pb.Api.options.Descriptor,
-        google_protobuf_api_pb.Api.version.Descriptor,
-        google_protobuf_api_pb.Api.source_context.Descriptor,
-        google_protobuf_api_pb.Api.mixins.Descriptor,
-        google_protobuf_api_pb.Api.syntax.Descriptor,
+        name = {
+            name = ".google.protobuf.Api.name",
+            number = 1,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_STRING,
+            options = {
+                packed = false,
+            }
+        },
+        methods = {
+            name = ".google.protobuf.Api.methods",
+            number = 2,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_REPEATED,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_MESSAGE,
+            type_name = ".google.protobuf.Method",
+            options = {
+                packed = false,
+            }
+        },
+        options = {
+            name = ".google.protobuf.Api.options",
+            number = 3,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_REPEATED,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_MESSAGE,
+            type_name = ".google.protobuf.Option",
+            options = {
+                packed = false,
+            }
+        },
+        version = {
+            name = ".google.protobuf.Api.version",
+            number = 4,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_STRING,
+            options = {
+                packed = false,
+            }
+        },
+        source_context = {
+            name = ".google.protobuf.Api.source_context",
+            number = 5,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_MESSAGE,
+            type_name = ".google.protobuf.SourceContext",
+            options = {
+                packed = false,
+            }
+        },
+        mixins = {
+            name = ".google.protobuf.Api.mixins",
+            number = 6,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_REPEATED,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_MESSAGE,
+            type_name = ".google.protobuf.Mixin",
+            options = {
+                packed = false,
+            }
+        },
+        syntax = {
+            name = ".google.protobuf.Api.syntax",
+            number = 7,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_ENUM,
+            type_name = ".google.protobuf.Syntax",
+            options = {
+                packed = false,
+            }
+        },
     },
-}
-google_protobuf_api_pb.Method.name.Descriptor = {
-    name = ".google.protobuf.Method.name",
-    number = 1,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_STRING,
-    options = {
-        packed = false,
-    }
-}
-google_protobuf_api_pb.Method.request_type_url.Descriptor = {
-    name = ".google.protobuf.Method.request_type_url",
-    number = 2,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_STRING,
-    options = {
-        packed = false,
-    }
-}
-google_protobuf_api_pb.Method.request_streaming.Descriptor = {
-    name = ".google.protobuf.Method.request_streaming",
-    number = 3,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_BOOL,
-    options = {
-        packed = false,
-    }
-}
-google_protobuf_api_pb.Method.response_type_url.Descriptor = {
-    name = ".google.protobuf.Method.response_type_url",
-    number = 4,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_STRING,
-    options = {
-        packed = false,
-    }
-}
-google_protobuf_api_pb.Method.response_streaming.Descriptor = {
-    name = ".google.protobuf.Method.response_streaming",
-    number = 5,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_BOOL,
-    options = {
-        packed = false,
-    }
-}
-google_protobuf_api_pb.Method.options.Descriptor = {
-    name = ".google.protobuf.Method.options",
-    number = 6,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_REPEATED,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_MESSAGE,
-    type_name = ".google.protobuf.Option",
-    options = {
-        packed = false,
-    }
-}
-google_protobuf_api_pb.Method.syntax.Descriptor = {
-    name = ".google.protobuf.Method.syntax",
-    number = 7,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_ENUM,
-    type_name = ".google.protobuf.Syntax",
-    options = {
-        packed = false,
-    }
 }
 google_protobuf_api_pb.Method.Descriptor = {
     name = ".google.protobuf.Method",
     field = {
-        google_protobuf_api_pb.Method.name.Descriptor,
-        google_protobuf_api_pb.Method.request_type_url.Descriptor,
-        google_protobuf_api_pb.Method.request_streaming.Descriptor,
-        google_protobuf_api_pb.Method.response_type_url.Descriptor,
-        google_protobuf_api_pb.Method.response_streaming.Descriptor,
-        google_protobuf_api_pb.Method.options.Descriptor,
-        google_protobuf_api_pb.Method.syntax.Descriptor,
+        name = {
+            name = ".google.protobuf.Method.name",
+            number = 1,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_STRING,
+            options = {
+                packed = false,
+            }
+        },
+        request_type_url = {
+            name = ".google.protobuf.Method.request_type_url",
+            number = 2,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_STRING,
+            options = {
+                packed = false,
+            }
+        },
+        request_streaming = {
+            name = ".google.protobuf.Method.request_streaming",
+            number = 3,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_BOOL,
+            options = {
+                packed = false,
+            }
+        },
+        response_type_url = {
+            name = ".google.protobuf.Method.response_type_url",
+            number = 4,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_STRING,
+            options = {
+                packed = false,
+            }
+        },
+        response_streaming = {
+            name = ".google.protobuf.Method.response_streaming",
+            number = 5,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_BOOL,
+            options = {
+                packed = false,
+            }
+        },
+        options = {
+            name = ".google.protobuf.Method.options",
+            number = 6,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_REPEATED,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_MESSAGE,
+            type_name = ".google.protobuf.Option",
+            options = {
+                packed = false,
+            }
+        },
+        syntax = {
+            name = ".google.protobuf.Method.syntax",
+            number = 7,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_ENUM,
+            type_name = ".google.protobuf.Syntax",
+            options = {
+                packed = false,
+            }
+        },
     },
-}
-google_protobuf_api_pb.Mixin.name.Descriptor = {
-    name = ".google.protobuf.Mixin.name",
-    number = 1,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_STRING,
-    options = {
-        packed = false,
-    }
-}
-google_protobuf_api_pb.Mixin.root.Descriptor = {
-    name = ".google.protobuf.Mixin.root",
-    number = 2,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_STRING,
-    options = {
-        packed = false,
-    }
 }
 google_protobuf_api_pb.Mixin.Descriptor = {
     name = ".google.protobuf.Mixin",
     field = {
-        google_protobuf_api_pb.Mixin.name.Descriptor,
-        google_protobuf_api_pb.Mixin.root.Descriptor,
+        name = {
+            name = ".google.protobuf.Mixin.name",
+            number = 1,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_STRING,
+            options = {
+                packed = false,
+            }
+        },
+        root = {
+            name = ".google.protobuf.Mixin.root",
+            number = 2,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_STRING,
+            options = {
+                packed = false,
+            }
+        },
     },
 }
 google_protobuf_api_pb.Descriptor = {

@@ -47,133 +47,123 @@ local google_protobuf_descriptor_pb = require "google/protobuf/descriptor_pb"
 google_protobuf_struct_pb.NullValue.Descriptor = {
     name = ".google.protobuf.NullValue",
 }
-google_protobuf_struct_pb.Struct.FieldsEntry.key.Descriptor = {
-    name = ".google.protobuf.Struct.FieldsEntry.key",
-    number = 1,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_STRING,
-    options = {
-        packed = false,
-    }
-}
-google_protobuf_struct_pb.Struct.FieldsEntry.value.Descriptor = {
-    name = ".google.protobuf.Struct.FieldsEntry.value",
-    number = 2,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_MESSAGE,
-    type_name = ".google.protobuf.Value",
-    options = {
-        packed = false,
-    }
-}
 google_protobuf_struct_pb.Struct.FieldsEntry.Descriptor = {
     name = ".google.protobuf.Struct.FieldsEntry",
     field = {
-        google_protobuf_struct_pb.Struct.FieldsEntry.key.Descriptor,
-        google_protobuf_struct_pb.Struct.FieldsEntry.value.Descriptor,
+        key = {
+            name = ".google.protobuf.Struct.FieldsEntry.key",
+            number = 1,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_STRING,
+            options = {
+                packed = false,
+            }
+        },
+        value = {
+            name = ".google.protobuf.Struct.FieldsEntry.value",
+            number = 2,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_MESSAGE,
+            type_name = ".google.protobuf.Value",
+            options = {
+                packed = false,
+            }
+        },
     },
-}
-google_protobuf_struct_pb.Struct.fields.Descriptor = {
-    name = ".google.protobuf.Struct.fields",
-    number = 1,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_REPEATED,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_MESSAGE,
-    type_name = ".google.protobuf.Struct.FieldsEntry",
-    options = {
-        packed = false,
-    }
 }
 google_protobuf_struct_pb.Struct.Descriptor = {
     name = ".google.protobuf.Struct",
     field = {
-        google_protobuf_struct_pb.Struct.fields.Descriptor,
+        fields = {
+            name = ".google.protobuf.Struct.fields",
+            number = 1,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_REPEATED,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_MESSAGE,
+            type_name = ".google.protobuf.Struct.FieldsEntry",
+            options = {
+                packed = false,
+            }
+        },
     },
-}
-google_protobuf_struct_pb.Value.null_value.Descriptor = {
-    name = ".google.protobuf.Value.null_value",
-    number = 1,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_ENUM,
-    type_name = ".google.protobuf.NullValue",
-    options = {
-        packed = false,
-    }
-}
-google_protobuf_struct_pb.Value.number_value.Descriptor = {
-    name = ".google.protobuf.Value.number_value",
-    number = 2,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_DOUBLE,
-    options = {
-        packed = false,
-    }
-}
-google_protobuf_struct_pb.Value.string_value.Descriptor = {
-    name = ".google.protobuf.Value.string_value",
-    number = 3,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_STRING,
-    options = {
-        packed = false,
-    }
-}
-google_protobuf_struct_pb.Value.bool_value.Descriptor = {
-    name = ".google.protobuf.Value.bool_value",
-    number = 4,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_BOOL,
-    options = {
-        packed = false,
-    }
-}
-google_protobuf_struct_pb.Value.struct_value.Descriptor = {
-    name = ".google.protobuf.Value.struct_value",
-    number = 5,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_MESSAGE,
-    type_name = ".google.protobuf.Struct",
-    options = {
-        packed = false,
-    }
-}
-google_protobuf_struct_pb.Value.list_value.Descriptor = {
-    name = ".google.protobuf.Value.list_value",
-    number = 6,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_MESSAGE,
-    type_name = ".google.protobuf.ListValue",
-    options = {
-        packed = false,
-    }
 }
 google_protobuf_struct_pb.Value.Descriptor = {
     name = ".google.protobuf.Value",
     field = {
-        google_protobuf_struct_pb.Value.null_value.Descriptor,
-        google_protobuf_struct_pb.Value.number_value.Descriptor,
-        google_protobuf_struct_pb.Value.string_value.Descriptor,
-        google_protobuf_struct_pb.Value.bool_value.Descriptor,
-        google_protobuf_struct_pb.Value.struct_value.Descriptor,
-        google_protobuf_struct_pb.Value.list_value.Descriptor,
+        null_value = {
+            name = ".google.protobuf.Value.null_value",
+            number = 1,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_ENUM,
+            type_name = ".google.protobuf.NullValue",
+            options = {
+                packed = false,
+            }
+        },
+        number_value = {
+            name = ".google.protobuf.Value.number_value",
+            number = 2,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_DOUBLE,
+            options = {
+                packed = false,
+            }
+        },
+        string_value = {
+            name = ".google.protobuf.Value.string_value",
+            number = 3,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_STRING,
+            options = {
+                packed = false,
+            }
+        },
+        bool_value = {
+            name = ".google.protobuf.Value.bool_value",
+            number = 4,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_BOOL,
+            options = {
+                packed = false,
+            }
+        },
+        struct_value = {
+            name = ".google.protobuf.Value.struct_value",
+            number = 5,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_MESSAGE,
+            type_name = ".google.protobuf.Struct",
+            options = {
+                packed = false,
+            }
+        },
+        list_value = {
+            name = ".google.protobuf.Value.list_value",
+            number = 6,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_MESSAGE,
+            type_name = ".google.protobuf.ListValue",
+            options = {
+                packed = false,
+            }
+        },
     },
     oneof_decl = {
         "kind",
     },
 }
-google_protobuf_struct_pb.ListValue.values.Descriptor = {
-    name = ".google.protobuf.ListValue.values",
-    number = 1,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_REPEATED,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_MESSAGE,
-    type_name = ".google.protobuf.Value",
-    options = {
-        packed = false,
-    }
-}
 google_protobuf_struct_pb.ListValue.Descriptor = {
     name = ".google.protobuf.ListValue",
     field = {
-        google_protobuf_struct_pb.ListValue.values.Descriptor,
+        values = {
+            name = ".google.protobuf.ListValue.values",
+            number = 1,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_REPEATED,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_MESSAGE,
+            type_name = ".google.protobuf.Value",
+            options = {
+                packed = false,
+            }
+        },
     },
 }
 google_protobuf_struct_pb.Descriptor = {

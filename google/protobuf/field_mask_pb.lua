@@ -13,19 +13,18 @@ end
 ----------------- Descriptor -----------------
 
 local google_protobuf_descriptor_pb = require "google/protobuf/descriptor_pb"
-google_protobuf_field_mask_pb.FieldMask.paths.Descriptor = {
-    name = ".google.protobuf.FieldMask.paths",
-    number = 1,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_REPEATED,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_STRING,
-    options = {
-        packed = false,
-    }
-}
 google_protobuf_field_mask_pb.FieldMask.Descriptor = {
     name = ".google.protobuf.FieldMask",
     field = {
-        google_protobuf_field_mask_pb.FieldMask.paths.Descriptor,
+        paths = {
+            name = ".google.protobuf.FieldMask.paths",
+            number = 1,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_REPEATED,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_STRING,
+            options = {
+                packed = false,
+            }
+        },
     },
 }
 google_protobuf_field_mask_pb.Descriptor = {
