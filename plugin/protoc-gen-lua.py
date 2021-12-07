@@ -19,9 +19,11 @@ import google.protobuf.descriptor_pb2 as descriptor_pb2
 
 from core import file, writer
 
-PWD = os.path.abspath(os.path.split(__file__)[0])
+PROTO_GEN_LUA_VERSION = "Develop"
+DEBUG = False
 
 if __name__ == "__main__":
+    writer.DEBUG = DEBUG
     plugin_require_bin = sys.stdin.buffer.read()
     code_gen_req = plugin_pb2.CodeGeneratorRequest()
     code_gen_req.ParseFromString(plugin_require_bin)
@@ -29,7 +31,9 @@ if __name__ == "__main__":
     code_generated = plugin_pb2.CodeGeneratorResponse()
     
     for proto_file in code_gen_req.proto_file:
-        file.File(proto_file)
+        f = file.File(proto_file)
+        f.set_protoc_version(f"v{code_gen_req.compiler_version.major}.{code_gen_req.compiler_version.minor}.{code_gen_req.compiler_version.patch}{code_gen_req.compiler_version.suffix}")
+        f.set_proto_gen_lua_version(PROTO_GEN_LUA_VERSION)
         
     for name, lua_file in file.file_map.items():
         if name in code_gen_req.file_to_generate:
