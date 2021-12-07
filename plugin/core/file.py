@@ -1,12 +1,11 @@
 import google.protobuf.descriptor_pb2 as descriptor_pb2
-from .base import *
 from .enum import *
 from .message import *
 from .writer import *
 
 file_map = {}
 
-class File(Base):
+class File:
     def __init__(self, file: descriptor_pb2.FileDescriptorProto) -> None:
         assert isinstance(file, descriptor_pb2.FileDescriptorProto)
         self.proto = file
@@ -40,7 +39,8 @@ class File(Base):
             s.p(f"-- The proto-gen-lua version is '{self.proto_gen_lua_version}'")
         # 引用其他文件
         for depend in self.proto.dependency:
-            s.p(f"local {file_map[depend].lua_name} = require \"{file_map[depend].module_name}\"")
+            module_name = ".".join(file_map[depend].module_name.split("/"))
+            s.p(f"local {file_map[depend].lua_name} = require \"{module_name}\"")
         # 创建一个本地表
         s.p(f"local {self.lua_name} = {{}}")
         # 创建所有的enum
