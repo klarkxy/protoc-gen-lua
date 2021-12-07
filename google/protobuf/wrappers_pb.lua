@@ -3,68 +3,86 @@
 -- The proto-gen-lua version is 'Develop'
 local google_protobuf_wrappers_pb = {}
 
-google_protobuf_wrappers_pb.DoubleValue = {
-    value = 0.0,
-}
-google_protobuf_wrappers_pb.DoubleValue.__call__ = function ()
-    return setmetatable({}, google_protobuf_wrappers_pb.DoubleValue)
-end
+google_protobuf_wrappers_pb.DoubleValue = setmetatable({}, {
+    __call = function ()
+        local default = {
+            value = 0.0,
+        }
+        return setmetatable(default, google_protobuf_wrappers_pb.DoubleValue)
+    end
+})
 
-google_protobuf_wrappers_pb.FloatValue = {
-    value = 0.0,
-}
-google_protobuf_wrappers_pb.FloatValue.__call__ = function ()
-    return setmetatable({}, google_protobuf_wrappers_pb.FloatValue)
-end
+google_protobuf_wrappers_pb.FloatValue = setmetatable({}, {
+    __call = function ()
+        local default = {
+            value = 0.0,
+        }
+        return setmetatable(default, google_protobuf_wrappers_pb.FloatValue)
+    end
+})
 
-google_protobuf_wrappers_pb.Int64Value = {
-    value = 0,
-}
-google_protobuf_wrappers_pb.Int64Value.__call__ = function ()
-    return setmetatable({}, google_protobuf_wrappers_pb.Int64Value)
-end
+google_protobuf_wrappers_pb.Int64Value = setmetatable({}, {
+    __call = function ()
+        local default = {
+            value = 0,
+        }
+        return setmetatable(default, google_protobuf_wrappers_pb.Int64Value)
+    end
+})
 
-google_protobuf_wrappers_pb.UInt64Value = {
-    value = 0,
-}
-google_protobuf_wrappers_pb.UInt64Value.__call__ = function ()
-    return setmetatable({}, google_protobuf_wrappers_pb.UInt64Value)
-end
+google_protobuf_wrappers_pb.UInt64Value = setmetatable({}, {
+    __call = function ()
+        local default = {
+            value = 0,
+        }
+        return setmetatable(default, google_protobuf_wrappers_pb.UInt64Value)
+    end
+})
 
-google_protobuf_wrappers_pb.Int32Value = {
-    value = 0,
-}
-google_protobuf_wrappers_pb.Int32Value.__call__ = function ()
-    return setmetatable({}, google_protobuf_wrappers_pb.Int32Value)
-end
+google_protobuf_wrappers_pb.Int32Value = setmetatable({}, {
+    __call = function ()
+        local default = {
+            value = 0,
+        }
+        return setmetatable(default, google_protobuf_wrappers_pb.Int32Value)
+    end
+})
 
-google_protobuf_wrappers_pb.UInt32Value = {
-    value = 0,
-}
-google_protobuf_wrappers_pb.UInt32Value.__call__ = function ()
-    return setmetatable({}, google_protobuf_wrappers_pb.UInt32Value)
-end
+google_protobuf_wrappers_pb.UInt32Value = setmetatable({}, {
+    __call = function ()
+        local default = {
+            value = 0,
+        }
+        return setmetatable(default, google_protobuf_wrappers_pb.UInt32Value)
+    end
+})
 
-google_protobuf_wrappers_pb.BoolValue = {
-    value = false,
-}
-google_protobuf_wrappers_pb.BoolValue.__call__ = function ()
-    return setmetatable({}, google_protobuf_wrappers_pb.BoolValue)
-end
+google_protobuf_wrappers_pb.BoolValue = setmetatable({}, {
+    __call = function ()
+        local default = {
+            value = false,
+        }
+        return setmetatable(default, google_protobuf_wrappers_pb.BoolValue)
+    end
+})
 
-google_protobuf_wrappers_pb.StringValue = {
-    value = "",
-}
-google_protobuf_wrappers_pb.StringValue.__call__ = function ()
-    return setmetatable({}, google_protobuf_wrappers_pb.StringValue)
-end
+google_protobuf_wrappers_pb.StringValue = setmetatable({}, {
+    __call = function ()
+        local default = {
+            value = "",
+        }
+        return setmetatable(default, google_protobuf_wrappers_pb.StringValue)
+    end
+})
 
-google_protobuf_wrappers_pb.BytesValue = {
-    value = "",
-}
-google_protobuf_wrappers_pb.BytesValue.__call__ = function ()
-    return setmetatable({}, google_protobuf_wrappers_pb.BytesValue)
-end
+google_protobuf_wrappers_pb.BytesValue = setmetatable({}, {
+    __call = function ()
+        local default = {
+            value = "",
+        }
+        return setmetatable(default, google_protobuf_wrappers_pb.BytesValue)
+    end
+})
 
 ----------------- Descriptor -----------------
 

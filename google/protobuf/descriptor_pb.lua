@@ -3,87 +3,101 @@
 -- The proto-gen-lua version is 'Develop'
 local google_protobuf_descriptor_pb = {}
 
-google_protobuf_descriptor_pb.FileDescriptorSet = {
-    file = {},
-}
-google_protobuf_descriptor_pb.FileDescriptorSet.__call__ = function ()
-    return setmetatable({}, google_protobuf_descriptor_pb.FileDescriptorSet)
-end
+google_protobuf_descriptor_pb.FileDescriptorSet = setmetatable({}, {
+    __call = function ()
+        local default = {
+            file = {},
+        }
+        return setmetatable(default, google_protobuf_descriptor_pb.FileDescriptorSet)
+    end
+})
 
-google_protobuf_descriptor_pb.FileDescriptorProto = {
-    name = "",
-    package = "",
-    dependency = {},
-    public_dependency = {},
-    weak_dependency = {},
-    message_type = {},
-    enum_type = {},
-    service = {},
-    extension = {},
-    options = {},
-    source_code_info = {},
-    syntax = "",
-}
-google_protobuf_descriptor_pb.FileDescriptorProto.__call__ = function ()
-    return setmetatable({}, google_protobuf_descriptor_pb.FileDescriptorProto)
-end
+google_protobuf_descriptor_pb.FileDescriptorProto = setmetatable({}, {
+    __call = function ()
+        local default = {
+            name = "",
+            package = "",
+            dependency = {},
+            public_dependency = {},
+            weak_dependency = {},
+            message_type = {},
+            enum_type = {},
+            service = {},
+            extension = {},
+            options = {},
+            source_code_info = {},
+            syntax = "",
+        }
+        return setmetatable(default, google_protobuf_descriptor_pb.FileDescriptorProto)
+    end
+})
 
-google_protobuf_descriptor_pb.DescriptorProto = {
-    name = "",
-    field = {},
-    extension = {},
-    nested_type = {},
-    enum_type = {},
-    extension_range = {},
-    oneof_decl = {},
-    options = {},
-    reserved_range = {},
-    reserved_name = {},
-}
-google_protobuf_descriptor_pb.DescriptorProto.__call__ = function ()
-    return setmetatable({}, google_protobuf_descriptor_pb.DescriptorProto)
-end
+google_protobuf_descriptor_pb.DescriptorProto = setmetatable({}, {
+    __call = function ()
+        local default = {
+            name = "",
+            field = {},
+            extension = {},
+            nested_type = {},
+            enum_type = {},
+            extension_range = {},
+            oneof_decl = {},
+            options = {},
+            reserved_range = {},
+            reserved_name = {},
+        }
+        return setmetatable(default, google_protobuf_descriptor_pb.DescriptorProto)
+    end
+})
 
-google_protobuf_descriptor_pb.DescriptorProto.ExtensionRange = {
-    start = 0,
-    end_ = 0,
-    options = {},
-}
-google_protobuf_descriptor_pb.DescriptorProto.ExtensionRange.__call__ = function ()
-    return setmetatable({}, google_protobuf_descriptor_pb.DescriptorProto.ExtensionRange)
-end
+google_protobuf_descriptor_pb.DescriptorProto.ExtensionRange = setmetatable({}, {
+    __call = function ()
+        local default = {
+            start = 0,
+            end_ = 0,
+            options = {},
+        }
+        return setmetatable(default, google_protobuf_descriptor_pb.DescriptorProto.ExtensionRange)
+    end
+})
 
-google_protobuf_descriptor_pb.DescriptorProto.ReservedRange = {
-    start = 0,
-    end_ = 0,
-}
-google_protobuf_descriptor_pb.DescriptorProto.ReservedRange.__call__ = function ()
-    return setmetatable({}, google_protobuf_descriptor_pb.DescriptorProto.ReservedRange)
-end
+google_protobuf_descriptor_pb.DescriptorProto.ReservedRange = setmetatable({}, {
+    __call = function ()
+        local default = {
+            start = 0,
+            end_ = 0,
+        }
+        return setmetatable(default, google_protobuf_descriptor_pb.DescriptorProto.ReservedRange)
+    end
+})
 
-google_protobuf_descriptor_pb.ExtensionRangeOptions = {
-    uninterpreted_option = {},
-}
-google_protobuf_descriptor_pb.ExtensionRangeOptions.__call__ = function ()
-    return setmetatable({}, google_protobuf_descriptor_pb.ExtensionRangeOptions)
-end
+google_protobuf_descriptor_pb.ExtensionRangeOptions = setmetatable({}, {
+    __call = function ()
+        local default = {
+            uninterpreted_option = {},
+        }
+        return setmetatable(default, google_protobuf_descriptor_pb.ExtensionRangeOptions)
+    end
+})
 
-google_protobuf_descriptor_pb.FieldDescriptorProto = {
-    name = "",
-    number = 0,
-    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
-    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_DOUBLE,
-    type_name = "",
-    extendee = "",
-    default_value = "",
-    oneof_index = 0,
-    json_name = "",
-    options = {},
-    proto3_optional = false,
-}
-google_protobuf_descriptor_pb.FieldDescriptorProto.__call__ = function ()
-    return setmetatable({}, google_protobuf_descriptor_pb.FieldDescriptorProto)
-end
+google_protobuf_descriptor_pb.FieldDescriptorProto = setmetatable({}, {
+    __call = function ()
+        local default = {
+            name = "",
+            number = 0,
+            label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
+            type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_DOUBLE,
+            type_name = "",
+            extendee = "",
+            default_value = "",
+            oneof_index = 0,
+            json_name = "",
+            options = {},
+            proto3_optional = false,
+        }
+        return setmetatable(default, google_protobuf_descriptor_pb.FieldDescriptorProto)
+    end
+})
 
 google_protobuf_descriptor_pb.FieldDescriptorProto.Type = {
     TYPE_DOUBLE = 1,
@@ -112,89 +126,103 @@ google_protobuf_descriptor_pb.FieldDescriptorProto.Label = {
     LABEL_REPEATED = 3,
 }
 
-google_protobuf_descriptor_pb.OneofDescriptorProto = {
-    name = "",
-    options = {},
-}
-google_protobuf_descriptor_pb.OneofDescriptorProto.__call__ = function ()
-    return setmetatable({}, google_protobuf_descriptor_pb.OneofDescriptorProto)
-end
+google_protobuf_descriptor_pb.OneofDescriptorProto = setmetatable({}, {
+    __call = function ()
+        local default = {
+            name = "",
+            options = {},
+        }
+        return setmetatable(default, google_protobuf_descriptor_pb.OneofDescriptorProto)
+    end
+})
 
-google_protobuf_descriptor_pb.EnumDescriptorProto = {
-    name = "",
-    value = {},
-    options = {},
-    reserved_range = {},
-    reserved_name = {},
-}
-google_protobuf_descriptor_pb.EnumDescriptorProto.__call__ = function ()
-    return setmetatable({}, google_protobuf_descriptor_pb.EnumDescriptorProto)
-end
+google_protobuf_descriptor_pb.EnumDescriptorProto = setmetatable({}, {
+    __call = function ()
+        local default = {
+            name = "",
+            value = {},
+            options = {},
+            reserved_range = {},
+            reserved_name = {},
+        }
+        return setmetatable(default, google_protobuf_descriptor_pb.EnumDescriptorProto)
+    end
+})
 
-google_protobuf_descriptor_pb.EnumDescriptorProto.EnumReservedRange = {
-    start = 0,
-    end_ = 0,
-}
-google_protobuf_descriptor_pb.EnumDescriptorProto.EnumReservedRange.__call__ = function ()
-    return setmetatable({}, google_protobuf_descriptor_pb.EnumDescriptorProto.EnumReservedRange)
-end
+google_protobuf_descriptor_pb.EnumDescriptorProto.EnumReservedRange = setmetatable({}, {
+    __call = function ()
+        local default = {
+            start = 0,
+            end_ = 0,
+        }
+        return setmetatable(default, google_protobuf_descriptor_pb.EnumDescriptorProto.EnumReservedRange)
+    end
+})
 
-google_protobuf_descriptor_pb.EnumValueDescriptorProto = {
-    name = "",
-    number = 0,
-    options = {},
-}
-google_protobuf_descriptor_pb.EnumValueDescriptorProto.__call__ = function ()
-    return setmetatable({}, google_protobuf_descriptor_pb.EnumValueDescriptorProto)
-end
+google_protobuf_descriptor_pb.EnumValueDescriptorProto = setmetatable({}, {
+    __call = function ()
+        local default = {
+            name = "",
+            number = 0,
+            options = {},
+        }
+        return setmetatable(default, google_protobuf_descriptor_pb.EnumValueDescriptorProto)
+    end
+})
 
-google_protobuf_descriptor_pb.ServiceDescriptorProto = {
-    name = "",
-    method = {},
-    options = {},
-}
-google_protobuf_descriptor_pb.ServiceDescriptorProto.__call__ = function ()
-    return setmetatable({}, google_protobuf_descriptor_pb.ServiceDescriptorProto)
-end
+google_protobuf_descriptor_pb.ServiceDescriptorProto = setmetatable({}, {
+    __call = function ()
+        local default = {
+            name = "",
+            method = {},
+            options = {},
+        }
+        return setmetatable(default, google_protobuf_descriptor_pb.ServiceDescriptorProto)
+    end
+})
 
-google_protobuf_descriptor_pb.MethodDescriptorProto = {
-    name = "",
-    input_type = "",
-    output_type = "",
-    options = {},
-    client_streaming = false,
-    server_streaming = false,
-}
-google_protobuf_descriptor_pb.MethodDescriptorProto.__call__ = function ()
-    return setmetatable({}, google_protobuf_descriptor_pb.MethodDescriptorProto)
-end
+google_protobuf_descriptor_pb.MethodDescriptorProto = setmetatable({}, {
+    __call = function ()
+        local default = {
+            name = "",
+            input_type = "",
+            output_type = "",
+            options = {},
+            client_streaming = false,
+            server_streaming = false,
+        }
+        return setmetatable(default, google_protobuf_descriptor_pb.MethodDescriptorProto)
+    end
+})
 
-google_protobuf_descriptor_pb.FileOptions = {
-    java_package = "",
-    java_outer_classname = "",
-    java_multiple_files = false,
-    java_generate_equals_and_hash = false,
-    java_string_check_utf8 = false,
-    optimize_for = google_protobuf_descriptor_pb.FileOptions.OptimizeMode.SPEED,
-    go_package = "",
-    cc_generic_services = false,
-    java_generic_services = false,
-    py_generic_services = false,
-    php_generic_services = false,
-    deprecated = false,
-    cc_enable_arenas = true,
-    objc_class_prefix = "",
-    csharp_namespace = "",
-    swift_prefix = "",
-    php_class_prefix = "",
-    php_namespace = "",
-    php_metadata_namespace = "",
-    ruby_package = "",
-    uninterpreted_option = {},
-}
-google_protobuf_descriptor_pb.FileOptions.__call__ = function ()
-    return setmetatable({}, google_protobuf_descriptor_pb.FileOptions)
-end
+google_protobuf_descriptor_pb.FileOptions = setmetatable({}, {
+    __call = function ()
+        local default = {
+            java_package = "",
+            java_outer_classname = "",
+            java_multiple_files = false,
+            java_generate_equals_and_hash = false,
+            java_string_check_utf8 = false,
+            optimize_for = google_protobuf_descriptor_pb.FileOptions.OptimizeMode.SPEED,
+            go_package = "",
+            cc_generic_services = false,
+            java_generic_services = false,
+            py_generic_services = false,
+            php_generic_services = false,
+            deprecated = false,
+            cc_enable_arenas = true,
+            objc_class_prefix = "",
+            csharp_namespace = "",
+            swift_prefix = "",
+            php_class_prefix = "",
+            php_namespace = "",
+            php_metadata_namespace = "",
+            ruby_package = "",
+            uninterpreted_option = {},
+        }
+        return setmetatable(default, google_protobuf_descriptor_pb.FileOptions)
+    end
+})
 
 google_protobuf_descriptor_pb.FileOptions.OptimizeMode = {
     SPEED = 1,
@@ -202,29 +230,33 @@ google_protobuf_descriptor_pb.FileOptions.OptimizeMode = {
     LITE_RUNTIME = 3,
 }
 
-google_protobuf_descriptor_pb.MessageOptions = {
-    message_set_wire_format = false,
-    no_standard_descriptor_accessor = false,
-    deprecated = false,
-    map_entry = false,
-    uninterpreted_option = {},
-}
-google_protobuf_descriptor_pb.MessageOptions.__call__ = function ()
-    return setmetatable({}, google_protobuf_descriptor_pb.MessageOptions)
-end
+google_protobuf_descriptor_pb.MessageOptions = setmetatable({}, {
+    __call = function ()
+        local default = {
+            message_set_wire_format = false,
+            no_standard_descriptor_accessor = false,
+            deprecated = false,
+            map_entry = false,
+            uninterpreted_option = {},
+        }
+        return setmetatable(default, google_protobuf_descriptor_pb.MessageOptions)
+    end
+})
 
-google_protobuf_descriptor_pb.FieldOptions = {
-    ctype = google_protobuf_descriptor_pb.FieldOptions.CType.STRING,
-    packed = false,
-    jstype = google_protobuf_descriptor_pb.FieldOptions.JSType.JS_NORMAL,
-    lazy = false,
-    deprecated = false,
-    weak = false,
-    uninterpreted_option = {},
-}
-google_protobuf_descriptor_pb.FieldOptions.__call__ = function ()
-    return setmetatable({}, google_protobuf_descriptor_pb.FieldOptions)
-end
+google_protobuf_descriptor_pb.FieldOptions = setmetatable({}, {
+    __call = function ()
+        local default = {
+            ctype = google_protobuf_descriptor_pb.FieldOptions.CType.STRING,
+            packed = false,
+            jstype = google_protobuf_descriptor_pb.FieldOptions.JSType.JS_NORMAL,
+            lazy = false,
+            deprecated = false,
+            weak = false,
+            uninterpreted_option = {},
+        }
+        return setmetatable(default, google_protobuf_descriptor_pb.FieldOptions)
+    end
+})
 
 google_protobuf_descriptor_pb.FieldOptions.CType = {
     STRING = 0,
@@ -238,46 +270,56 @@ google_protobuf_descriptor_pb.FieldOptions.JSType = {
     JS_NUMBER = 2,
 }
 
-google_protobuf_descriptor_pb.OneofOptions = {
-    uninterpreted_option = {},
-}
-google_protobuf_descriptor_pb.OneofOptions.__call__ = function ()
-    return setmetatable({}, google_protobuf_descriptor_pb.OneofOptions)
-end
+google_protobuf_descriptor_pb.OneofOptions = setmetatable({}, {
+    __call = function ()
+        local default = {
+            uninterpreted_option = {},
+        }
+        return setmetatable(default, google_protobuf_descriptor_pb.OneofOptions)
+    end
+})
 
-google_protobuf_descriptor_pb.EnumOptions = {
-    allow_alias = false,
-    deprecated = false,
-    uninterpreted_option = {},
-}
-google_protobuf_descriptor_pb.EnumOptions.__call__ = function ()
-    return setmetatable({}, google_protobuf_descriptor_pb.EnumOptions)
-end
+google_protobuf_descriptor_pb.EnumOptions = setmetatable({}, {
+    __call = function ()
+        local default = {
+            allow_alias = false,
+            deprecated = false,
+            uninterpreted_option = {},
+        }
+        return setmetatable(default, google_protobuf_descriptor_pb.EnumOptions)
+    end
+})
 
-google_protobuf_descriptor_pb.EnumValueOptions = {
-    deprecated = false,
-    uninterpreted_option = {},
-}
-google_protobuf_descriptor_pb.EnumValueOptions.__call__ = function ()
-    return setmetatable({}, google_protobuf_descriptor_pb.EnumValueOptions)
-end
+google_protobuf_descriptor_pb.EnumValueOptions = setmetatable({}, {
+    __call = function ()
+        local default = {
+            deprecated = false,
+            uninterpreted_option = {},
+        }
+        return setmetatable(default, google_protobuf_descriptor_pb.EnumValueOptions)
+    end
+})
 
-google_protobuf_descriptor_pb.ServiceOptions = {
-    deprecated = false,
-    uninterpreted_option = {},
-}
-google_protobuf_descriptor_pb.ServiceOptions.__call__ = function ()
-    return setmetatable({}, google_protobuf_descriptor_pb.ServiceOptions)
-end
+google_protobuf_descriptor_pb.ServiceOptions = setmetatable({}, {
+    __call = function ()
+        local default = {
+            deprecated = false,
+            uninterpreted_option = {},
+        }
+        return setmetatable(default, google_protobuf_descriptor_pb.ServiceOptions)
+    end
+})
 
-google_protobuf_descriptor_pb.MethodOptions = {
-    deprecated = false,
-    idempotency_level = google_protobuf_descriptor_pb.MethodOptions.IdempotencyLevel.IDEMPOTENCY_UNKNOWN,
-    uninterpreted_option = {},
-}
-google_protobuf_descriptor_pb.MethodOptions.__call__ = function ()
-    return setmetatable({}, google_protobuf_descriptor_pb.MethodOptions)
-end
+google_protobuf_descriptor_pb.MethodOptions = setmetatable({}, {
+    __call = function ()
+        local default = {
+            deprecated = false,
+            idempotency_level = google_protobuf_descriptor_pb.MethodOptions.IdempotencyLevel.IDEMPOTENCY_UNKNOWN,
+            uninterpreted_option = {},
+        }
+        return setmetatable(default, google_protobuf_descriptor_pb.MethodOptions)
+    end
+})
 
 google_protobuf_descriptor_pb.MethodOptions.IdempotencyLevel = {
     IDEMPOTENCY_UNKNOWN = 0,
@@ -285,61 +327,73 @@ google_protobuf_descriptor_pb.MethodOptions.IdempotencyLevel = {
     IDEMPOTENT = 2,
 }
 
-google_protobuf_descriptor_pb.UninterpretedOption = {
-    name = {},
-    identifier_value = "",
-    positive_int_value = 0,
-    negative_int_value = 0,
-    double_value = 0.0,
-    string_value = "",
-    aggregate_value = "",
-}
-google_protobuf_descriptor_pb.UninterpretedOption.__call__ = function ()
-    return setmetatable({}, google_protobuf_descriptor_pb.UninterpretedOption)
-end
+google_protobuf_descriptor_pb.UninterpretedOption = setmetatable({}, {
+    __call = function ()
+        local default = {
+            name = {},
+            identifier_value = "",
+            positive_int_value = 0,
+            negative_int_value = 0,
+            double_value = 0.0,
+            string_value = "",
+            aggregate_value = "",
+        }
+        return setmetatable(default, google_protobuf_descriptor_pb.UninterpretedOption)
+    end
+})
 
-google_protobuf_descriptor_pb.UninterpretedOption.NamePart = {
-    name_part = "",
-    is_extension = false,
-}
-google_protobuf_descriptor_pb.UninterpretedOption.NamePart.__call__ = function ()
-    return setmetatable({}, google_protobuf_descriptor_pb.UninterpretedOption.NamePart)
-end
+google_protobuf_descriptor_pb.UninterpretedOption.NamePart = setmetatable({}, {
+    __call = function ()
+        local default = {
+            name_part = "",
+            is_extension = false,
+        }
+        return setmetatable(default, google_protobuf_descriptor_pb.UninterpretedOption.NamePart)
+    end
+})
 
-google_protobuf_descriptor_pb.SourceCodeInfo = {
-    location = {},
-}
-google_protobuf_descriptor_pb.SourceCodeInfo.__call__ = function ()
-    return setmetatable({}, google_protobuf_descriptor_pb.SourceCodeInfo)
-end
+google_protobuf_descriptor_pb.SourceCodeInfo = setmetatable({}, {
+    __call = function ()
+        local default = {
+            location = {},
+        }
+        return setmetatable(default, google_protobuf_descriptor_pb.SourceCodeInfo)
+    end
+})
 
-google_protobuf_descriptor_pb.SourceCodeInfo.Location = {
-    path = {},
-    span = {},
-    leading_comments = "",
-    trailing_comments = "",
-    leading_detached_comments = {},
-}
-google_protobuf_descriptor_pb.SourceCodeInfo.Location.__call__ = function ()
-    return setmetatable({}, google_protobuf_descriptor_pb.SourceCodeInfo.Location)
-end
+google_protobuf_descriptor_pb.SourceCodeInfo.Location = setmetatable({}, {
+    __call = function ()
+        local default = {
+            path = {},
+            span = {},
+            leading_comments = "",
+            trailing_comments = "",
+            leading_detached_comments = {},
+        }
+        return setmetatable(default, google_protobuf_descriptor_pb.SourceCodeInfo.Location)
+    end
+})
 
-google_protobuf_descriptor_pb.GeneratedCodeInfo = {
-    annotation = {},
-}
-google_protobuf_descriptor_pb.GeneratedCodeInfo.__call__ = function ()
-    return setmetatable({}, google_protobuf_descriptor_pb.GeneratedCodeInfo)
-end
+google_protobuf_descriptor_pb.GeneratedCodeInfo = setmetatable({}, {
+    __call = function ()
+        local default = {
+            annotation = {},
+        }
+        return setmetatable(default, google_protobuf_descriptor_pb.GeneratedCodeInfo)
+    end
+})
 
-google_protobuf_descriptor_pb.GeneratedCodeInfo.Annotation = {
-    path = {},
-    source_file = "",
-    begin = 0,
-    end_ = 0,
-}
-google_protobuf_descriptor_pb.GeneratedCodeInfo.Annotation.__call__ = function ()
-    return setmetatable({}, google_protobuf_descriptor_pb.GeneratedCodeInfo.Annotation)
-end
+google_protobuf_descriptor_pb.GeneratedCodeInfo.Annotation = setmetatable({}, {
+    __call = function ()
+        local default = {
+            path = {},
+            source_file = "",
+            begin = 0,
+            end_ = 0,
+        }
+        return setmetatable(default, google_protobuf_descriptor_pb.GeneratedCodeInfo.Annotation)
+    end
+})
 
 ----------------- Descriptor -----------------
 

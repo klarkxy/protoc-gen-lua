@@ -10,33 +10,37 @@ google_protobuf_type_pb.Syntax = {
     SYNTAX_PROTO3 = 1,
 }
 
-google_protobuf_type_pb.Type = {
-    name = "",
-    fields = {},
-    oneofs = {},
-    options = {},
-    source_context = {},
-    syntax = google_protobuf_type_pb.Syntax.SYNTAX_PROTO2,
-}
-google_protobuf_type_pb.Type.__call__ = function ()
-    return setmetatable({}, google_protobuf_type_pb.Type)
-end
+google_protobuf_type_pb.Type = setmetatable({}, {
+    __call = function ()
+        local default = {
+            name = "",
+            fields = {},
+            oneofs = {},
+            options = {},
+            source_context = {},
+            syntax = google_protobuf_type_pb.Syntax.SYNTAX_PROTO2,
+        }
+        return setmetatable(default, google_protobuf_type_pb.Type)
+    end
+})
 
-google_protobuf_type_pb.Field = {
-    kind = google_protobuf_type_pb.Field.Kind.TYPE_UNKNOWN,
-    cardinality = google_protobuf_type_pb.Field.Cardinality.CARDINALITY_UNKNOWN,
-    number = 0,
-    name = "",
-    type_url = "",
-    oneof_index = 0,
-    packed = false,
-    options = {},
-    json_name = "",
-    default_value = "",
-}
-google_protobuf_type_pb.Field.__call__ = function ()
-    return setmetatable({}, google_protobuf_type_pb.Field)
-end
+google_protobuf_type_pb.Field = setmetatable({}, {
+    __call = function ()
+        local default = {
+            kind = google_protobuf_type_pb.Field.Kind.TYPE_UNKNOWN,
+            cardinality = google_protobuf_type_pb.Field.Cardinality.CARDINALITY_UNKNOWN,
+            number = 0,
+            name = "",
+            type_url = "",
+            oneof_index = 0,
+            packed = false,
+            options = {},
+            json_name = "",
+            default_value = "",
+        }
+        return setmetatable(default, google_protobuf_type_pb.Field)
+    end
+})
 
 google_protobuf_type_pb.Field.Kind = {
     TYPE_UNKNOWN = 0,
@@ -67,33 +71,39 @@ google_protobuf_type_pb.Field.Cardinality = {
     CARDINALITY_REPEATED = 3,
 }
 
-google_protobuf_type_pb.Enum = {
-    name = "",
-    enumvalue = {},
-    options = {},
-    source_context = {},
-    syntax = google_protobuf_type_pb.Syntax.SYNTAX_PROTO2,
-}
-google_protobuf_type_pb.Enum.__call__ = function ()
-    return setmetatable({}, google_protobuf_type_pb.Enum)
-end
+google_protobuf_type_pb.Enum = setmetatable({}, {
+    __call = function ()
+        local default = {
+            name = "",
+            enumvalue = {},
+            options = {},
+            source_context = {},
+            syntax = google_protobuf_type_pb.Syntax.SYNTAX_PROTO2,
+        }
+        return setmetatable(default, google_protobuf_type_pb.Enum)
+    end
+})
 
-google_protobuf_type_pb.EnumValue = {
-    name = "",
-    number = 0,
-    options = {},
-}
-google_protobuf_type_pb.EnumValue.__call__ = function ()
-    return setmetatable({}, google_protobuf_type_pb.EnumValue)
-end
+google_protobuf_type_pb.EnumValue = setmetatable({}, {
+    __call = function ()
+        local default = {
+            name = "",
+            number = 0,
+            options = {},
+        }
+        return setmetatable(default, google_protobuf_type_pb.EnumValue)
+    end
+})
 
-google_protobuf_type_pb.Option = {
-    name = "",
-    value = {},
-}
-google_protobuf_type_pb.Option.__call__ = function ()
-    return setmetatable({}, google_protobuf_type_pb.Option)
-end
+google_protobuf_type_pb.Option = setmetatable({}, {
+    __call = function ()
+        local default = {
+            name = "",
+            value = {},
+        }
+        return setmetatable(default, google_protobuf_type_pb.Option)
+    end
+})
 
 ----------------- Descriptor -----------------
 

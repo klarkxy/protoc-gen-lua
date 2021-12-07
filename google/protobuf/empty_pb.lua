@@ -3,11 +3,13 @@
 -- The proto-gen-lua version is 'Develop'
 local google_protobuf_empty_pb = {}
 
-google_protobuf_empty_pb.Empty = {
-}
-google_protobuf_empty_pb.Empty.__call__ = function ()
-    return setmetatable({}, google_protobuf_empty_pb.Empty)
-end
+google_protobuf_empty_pb.Empty = setmetatable({}, {
+    __call = function ()
+        local default = {
+        }
+        return setmetatable(default, google_protobuf_empty_pb.Empty)
+    end
+})
 
 ----------------- Descriptor -----------------
 

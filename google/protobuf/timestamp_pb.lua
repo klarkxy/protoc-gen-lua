@@ -3,13 +3,15 @@
 -- The proto-gen-lua version is 'Develop'
 local google_protobuf_timestamp_pb = {}
 
-google_protobuf_timestamp_pb.Timestamp = {
-    seconds = 0,
-    nanos = 0,
-}
-google_protobuf_timestamp_pb.Timestamp.__call__ = function ()
-    return setmetatable({}, google_protobuf_timestamp_pb.Timestamp)
-end
+google_protobuf_timestamp_pb.Timestamp = setmetatable({}, {
+    __call = function ()
+        local default = {
+            seconds = 0,
+            nanos = 0,
+        }
+        return setmetatable(default, google_protobuf_timestamp_pb.Timestamp)
+    end
+})
 
 ----------------- Descriptor -----------------
 

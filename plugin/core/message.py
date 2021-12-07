@@ -96,15 +96,18 @@ class Message(Base):
     def generate(self, s : Writer) -> str:
         log(f"Generate Message '{self.proto_name}'")
         s.p("")
-        s.p(f"{self.lua_name} = {{")
-        with s.sub(end=",\n") as sub:
-            for field in self.fields:
-                 field.generate(sub)
-        s.p("}")
-        s.p(f"{self.lua_name}.__call__ = function ()")
+        s.p(f"{self.lua_name} = setmetatable({{}}, {{")
         with s:
-            s.p(f"return setmetatable({{}}, {self.lua_name})")
-        s.p(f"end")
+            s.p("__call = function ()")
+            with s:
+                s.p("local default = {")
+                with s.sub(end=",\n") as sub:
+                    for field in self.fields:
+                        field.generate(sub)
+                s.p("}")               
+                s.p(f"return setmetatable(default, {self.lua_name})")
+            s.p(f"end")
+        s.p("})")
         for enm in self.enums:
             enm.generate(s)
         for message in self.messages:

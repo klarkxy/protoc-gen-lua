@@ -3,13 +3,15 @@
 -- The proto-gen-lua version is 'Develop'
 local google_protobuf_any_pb = {}
 
-google_protobuf_any_pb.Any = {
-    type_url = "",
-    value = "",
-}
-google_protobuf_any_pb.Any.__call__ = function ()
-    return setmetatable({}, google_protobuf_any_pb.Any)
-end
+google_protobuf_any_pb.Any = setmetatable({}, {
+    __call = function ()
+        local default = {
+            type_url = "",
+            value = "",
+        }
+        return setmetatable(default, google_protobuf_any_pb.Any)
+    end
+})
 
 ----------------- Descriptor -----------------
 

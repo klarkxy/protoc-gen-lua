@@ -3,12 +3,14 @@
 -- The proto-gen-lua version is 'Develop'
 local google_protobuf_field_mask_pb = {}
 
-google_protobuf_field_mask_pb.FieldMask = {
-    paths = {},
-}
-google_protobuf_field_mask_pb.FieldMask.__call__ = function ()
-    return setmetatable({}, google_protobuf_field_mask_pb.FieldMask)
-end
+google_protobuf_field_mask_pb.FieldMask = setmetatable({}, {
+    __call = function ()
+        local default = {
+            paths = {},
+        }
+        return setmetatable(default, google_protobuf_field_mask_pb.FieldMask)
+    end
+})
 
 ----------------- Descriptor -----------------
 

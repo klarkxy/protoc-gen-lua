@@ -3,12 +3,14 @@
 -- The proto-gen-lua version is 'Develop'
 local google_protobuf_source_context_pb = {}
 
-google_protobuf_source_context_pb.SourceContext = {
-    file_name = "",
-}
-google_protobuf_source_context_pb.SourceContext.__call__ = function ()
-    return setmetatable({}, google_protobuf_source_context_pb.SourceContext)
-end
+google_protobuf_source_context_pb.SourceContext = setmetatable({}, {
+    __call = function ()
+        local default = {
+            file_name = "",
+        }
+        return setmetatable(default, google_protobuf_source_context_pb.SourceContext)
+    end
+})
 
 ----------------- Descriptor -----------------
 

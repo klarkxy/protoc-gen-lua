@@ -7,39 +7,47 @@ google_protobuf_struct_pb.NullValue = {
     NULL_VALUE = 0,
 }
 
-google_protobuf_struct_pb.Struct = {
-    fields = {},
-}
-google_protobuf_struct_pb.Struct.__call__ = function ()
-    return setmetatable({}, google_protobuf_struct_pb.Struct)
-end
+google_protobuf_struct_pb.Struct = setmetatable({}, {
+    __call = function ()
+        local default = {
+            fields = {},
+        }
+        return setmetatable(default, google_protobuf_struct_pb.Struct)
+    end
+})
 
-google_protobuf_struct_pb.Struct.FieldsEntry = {
-    key = "",
-    value = {},
-}
-google_protobuf_struct_pb.Struct.FieldsEntry.__call__ = function ()
-    return setmetatable({}, google_protobuf_struct_pb.Struct.FieldsEntry)
-end
+google_protobuf_struct_pb.Struct.FieldsEntry = setmetatable({}, {
+    __call = function ()
+        local default = {
+            key = "",
+            value = {},
+        }
+        return setmetatable(default, google_protobuf_struct_pb.Struct.FieldsEntry)
+    end
+})
 
-google_protobuf_struct_pb.Value = {
-    null_value = google_protobuf_struct_pb.NullValue.NULL_VALUE,
-    number_value = 0.0,
-    string_value = "",
-    bool_value = false,
-    struct_value = {},
-    list_value = {},
-}
-google_protobuf_struct_pb.Value.__call__ = function ()
-    return setmetatable({}, google_protobuf_struct_pb.Value)
-end
+google_protobuf_struct_pb.Value = setmetatable({}, {
+    __call = function ()
+        local default = {
+            null_value = google_protobuf_struct_pb.NullValue.NULL_VALUE,
+            number_value = 0.0,
+            string_value = "",
+            bool_value = false,
+            struct_value = {},
+            list_value = {},
+        }
+        return setmetatable(default, google_protobuf_struct_pb.Value)
+    end
+})
 
-google_protobuf_struct_pb.ListValue = {
-    values = {},
-}
-google_protobuf_struct_pb.ListValue.__call__ = function ()
-    return setmetatable({}, google_protobuf_struct_pb.ListValue)
-end
+google_protobuf_struct_pb.ListValue = setmetatable({}, {
+    __call = function ()
+        local default = {
+            values = {},
+        }
+        return setmetatable(default, google_protobuf_struct_pb.ListValue)
+    end
+})
 
 ----------------- Descriptor -----------------
 

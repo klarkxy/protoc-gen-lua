@@ -5,39 +5,45 @@ local google_protobuf_source_context_pb = require "google.protobuf.source_contex
 local google_protobuf_type_pb = require "google.protobuf.type_pb"
 local google_protobuf_api_pb = {}
 
-google_protobuf_api_pb.Api = {
-    name = "",
-    methods = {},
-    options = {},
-    version = "",
-    source_context = {},
-    mixins = {},
-    syntax = google_protobuf_type_pb.Syntax.SYNTAX_PROTO2,
-}
-google_protobuf_api_pb.Api.__call__ = function ()
-    return setmetatable({}, google_protobuf_api_pb.Api)
-end
+google_protobuf_api_pb.Api = setmetatable({}, {
+    __call = function ()
+        local default = {
+            name = "",
+            methods = {},
+            options = {},
+            version = "",
+            source_context = {},
+            mixins = {},
+            syntax = google_protobuf_type_pb.Syntax.SYNTAX_PROTO2,
+        }
+        return setmetatable(default, google_protobuf_api_pb.Api)
+    end
+})
 
-google_protobuf_api_pb.Method = {
-    name = "",
-    request_type_url = "",
-    request_streaming = false,
-    response_type_url = "",
-    response_streaming = false,
-    options = {},
-    syntax = google_protobuf_type_pb.Syntax.SYNTAX_PROTO2,
-}
-google_protobuf_api_pb.Method.__call__ = function ()
-    return setmetatable({}, google_protobuf_api_pb.Method)
-end
+google_protobuf_api_pb.Method = setmetatable({}, {
+    __call = function ()
+        local default = {
+            name = "",
+            request_type_url = "",
+            request_streaming = false,
+            response_type_url = "",
+            response_streaming = false,
+            options = {},
+            syntax = google_protobuf_type_pb.Syntax.SYNTAX_PROTO2,
+        }
+        return setmetatable(default, google_protobuf_api_pb.Method)
+    end
+})
 
-google_protobuf_api_pb.Mixin = {
-    name = "",
-    root = "",
-}
-google_protobuf_api_pb.Mixin.__call__ = function ()
-    return setmetatable({}, google_protobuf_api_pb.Mixin)
-end
+google_protobuf_api_pb.Mixin = setmetatable({}, {
+    __call = function ()
+        local default = {
+            name = "",
+            root = "",
+        }
+        return setmetatable(default, google_protobuf_api_pb.Mixin)
+    end
+})
 
 ----------------- Descriptor -----------------
 

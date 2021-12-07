@@ -4,49 +4,57 @@
 local google_protobuf_descriptor_pb = require "google.protobuf.descriptor_pb"
 local google_protobuf_compiler_plugin_pb = {}
 
-google_protobuf_compiler_plugin_pb.Version = {
-    major = 0,
-    minor = 0,
-    patch = 0,
-    suffix = "",
-}
-google_protobuf_compiler_plugin_pb.Version.__call__ = function ()
-    return setmetatable({}, google_protobuf_compiler_plugin_pb.Version)
-end
+google_protobuf_compiler_plugin_pb.Version = setmetatable({}, {
+    __call = function ()
+        local default = {
+            major = 0,
+            minor = 0,
+            patch = 0,
+            suffix = "",
+        }
+        return setmetatable(default, google_protobuf_compiler_plugin_pb.Version)
+    end
+})
 
-google_protobuf_compiler_plugin_pb.CodeGeneratorRequest = {
-    file_to_generate = {},
-    parameter = "",
-    proto_file = {},
-    compiler_version = {},
-}
-google_protobuf_compiler_plugin_pb.CodeGeneratorRequest.__call__ = function ()
-    return setmetatable({}, google_protobuf_compiler_plugin_pb.CodeGeneratorRequest)
-end
+google_protobuf_compiler_plugin_pb.CodeGeneratorRequest = setmetatable({}, {
+    __call = function ()
+        local default = {
+            file_to_generate = {},
+            parameter = "",
+            proto_file = {},
+            compiler_version = {},
+        }
+        return setmetatable(default, google_protobuf_compiler_plugin_pb.CodeGeneratorRequest)
+    end
+})
 
-google_protobuf_compiler_plugin_pb.CodeGeneratorResponse = {
-    error = "",
-    supported_features = 0,
-    file = {},
-}
-google_protobuf_compiler_plugin_pb.CodeGeneratorResponse.__call__ = function ()
-    return setmetatable({}, google_protobuf_compiler_plugin_pb.CodeGeneratorResponse)
-end
+google_protobuf_compiler_plugin_pb.CodeGeneratorResponse = setmetatable({}, {
+    __call = function ()
+        local default = {
+            error = "",
+            supported_features = 0,
+            file = {},
+        }
+        return setmetatable(default, google_protobuf_compiler_plugin_pb.CodeGeneratorResponse)
+    end
+})
 
 google_protobuf_compiler_plugin_pb.CodeGeneratorResponse.Feature = {
     FEATURE_NONE = 0,
     FEATURE_PROTO3_OPTIONAL = 1,
 }
 
-google_protobuf_compiler_plugin_pb.CodeGeneratorResponse.File = {
-    name = "",
-    insertion_point = "",
-    content = "",
-    generated_code_info = {},
-}
-google_protobuf_compiler_plugin_pb.CodeGeneratorResponse.File.__call__ = function ()
-    return setmetatable({}, google_protobuf_compiler_plugin_pb.CodeGeneratorResponse.File)
-end
+google_protobuf_compiler_plugin_pb.CodeGeneratorResponse.File = setmetatable({}, {
+    __call = function ()
+        local default = {
+            name = "",
+            insertion_point = "",
+            content = "",
+            generated_code_info = {},
+        }
+        return setmetatable(default, google_protobuf_compiler_plugin_pb.CodeGeneratorResponse.File)
+    end
+})
 
 ----------------- Descriptor -----------------
 
