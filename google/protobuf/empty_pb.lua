@@ -2,11 +2,24 @@
 local google_protobuf_empty_pb = {}
 
 google_protobuf_empty_pb.Empty = {
-    __call__ = function ()
-        local message = {}
-        return message
-    end,
-
 }
+google_protobuf_empty_pb.Empty.__call__ = function ()
+    return setmetatable({}, google_protobuf_empty_pb.Empty)
+end
 
+----------------- Descriptor -----------------
+
+local google_protobuf_descriptor_pb = require "google/protobuf/descriptor_pb"
+google_protobuf_empty_pb.Empty.Descriptor = {
+    name = ".google.protobuf.Empty",
+    field = {
+    },
+}
+google_protobuf_empty_pb.Descriptor = {
+    name = "google/protobuf/empty.proto",
+    package = "google.protobuf",
+    message_type = {
+        google_protobuf_empty_pb.Empty.Descriptor,
+    },
+}
 return google_protobuf_empty_pb

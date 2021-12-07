@@ -2,15 +2,46 @@
 local google_protobuf_duration_pb = {}
 
 google_protobuf_duration_pb.Duration = {
-    __call__ = function ()
-        local message = {
-            seconds = 0,
-            nanos = 0,
-        }
-
-        return message
-    end,
-
+    seconds = 0,
+    nanos = 0,
 }
+google_protobuf_duration_pb.Duration.__call__ = function ()
+    return setmetatable({}, google_protobuf_duration_pb.Duration)
+end
 
+----------------- Descriptor -----------------
+
+local google_protobuf_descriptor_pb = require "google/protobuf/descriptor_pb"
+google_protobuf_duration_pb.Duration.seconds.Descriptor = {
+    name = ".google.protobuf.Duration.seconds",
+    number = 1,
+    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
+    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_INT64,
+    options = {
+        packed = false,
+    }
+}
+google_protobuf_duration_pb.Duration.nanos.Descriptor = {
+    name = ".google.protobuf.Duration.nanos",
+    number = 2,
+    label = google_protobuf_descriptor_pb.FieldDescriptorProto.Label.LABEL_OPTIONAL,
+    type = google_protobuf_descriptor_pb.FieldDescriptorProto.Type.TYPE_INT32,
+    options = {
+        packed = false,
+    }
+}
+google_protobuf_duration_pb.Duration.Descriptor = {
+    name = ".google.protobuf.Duration",
+    field = {
+        google_protobuf_duration_pb.Duration.seconds.Descriptor,
+        google_protobuf_duration_pb.Duration.nanos.Descriptor,
+    },
+}
+google_protobuf_duration_pb.Descriptor = {
+    name = "google/protobuf/duration.proto",
+    package = "google.protobuf",
+    message_type = {
+        google_protobuf_duration_pb.Duration.Descriptor,
+    },
+}
 return google_protobuf_duration_pb
