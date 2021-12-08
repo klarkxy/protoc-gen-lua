@@ -1,6 +1,3 @@
-#!/usr/bin/env python3
-# -*- encoding:utf8 -*-
-
 #  FILE:  download-protoc.py
 #  DESCRIPTION:  protoc-gen-lua
 #      Google's Protocol Buffers project, ported to lua.

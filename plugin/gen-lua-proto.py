@@ -1,6 +1,3 @@
-#!/usr/bin/env python3
-# -*- encoding:utf8 -*-
-
 #  FILE:  gen-lua-proto.py
 #  DESCRIPTION:  protoc-gen-lua
 #      Google's Protocol Buffers project, ported to lua.
@@ -36,5 +33,17 @@ for root, dirs, files in os.walk(INCLUDE_PATH):
             real_files.append(realfile)
 
 cmd = f"{PROTOC} --plugin=protoc-gen-lua={PROTOC_GEN_LUA} --lua_out={LUA_OUT_PATH} --proto_path={INCLUDE_PATH} " + " ".join(real_files)
+print(cmd)
+os.system(cmd)
+
+EXAMPLE_PATH = os.path.join(LUA_OUT_PATH, "example")
+real_files = []
+for root, dirs, files in os.walk(EXAMPLE_PATH):
+    for file in files:
+        if file.endswith(".proto"):
+            realfile = os.path.join(root, file)
+            real_files.append(realfile)
+
+cmd = f"{PROTOC} --plugin=protoc-gen-lua={PROTOC_GEN_LUA} --lua_out={EXAMPLE_PATH} --proto_path={EXAMPLE_PATH} " + " ".join(real_files)
 print(cmd)
 os.system(cmd)
