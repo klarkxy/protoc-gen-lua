@@ -1,3 +1,17 @@
+#  FILE:  plugin/core/file.py
+#  DESCRIPTION:  protoc-gen-lua
+#      Google's Protocol Buffers project, ported to lua.
+#      https://github.com/klarkxy/protoc-gen-lua/
+#
+#      Copyright (c) 2021 , Klarkxy 278370456@qq.com
+#      All rights reserved.
+#
+#      Use, modification and distribution are subject to the "New BSD License"
+#      as listed at <url: http://www.opensource.org/licenses/bsd-license.php >.
+#
+#  COMPANY:  BlackFox
+#  CREATED:  2021-12-07 10:30:58 CST
+
 import google.protobuf.descriptor_pb2 as descriptor_pb2
 from .enum import *
 from .message import *

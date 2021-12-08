@@ -1,13 +1,20 @@
 #!/usr/bin/env python3
 # -*- encoding:utf8 -*-
-# protoc-gen-lua
-# Google's Protocol Buffers project, ported to lua.
+
+#  FILE:  protoc-gen-lua.py
+#  DESCRIPTION:  protoc-gen-lua
+#      Google's Protocol Buffers project, ported to lua.
+#      https://github.com/klarkxy/protoc-gen-lua/
 #
-# Copyright (c) 2010 , Klarkxy 278370456@qq.com
-# All rights reserved.
+#      Copyright (c) 2021 , Klarkxy 278370456@qq.com
+#      All rights reserved.
 #
-# Use, modification and distribution are subject to the "New BSD License"
-# as listed at <url: http://www.opensource.org/licenses/bsd-license.php >.
+#      Use, modification and distribution are subject to the "New BSD License"
+#      as listed at <url: http://www.opensource.org/licenses/bsd-license.php >.
+#
+#  COMPANY:  BlackFox
+#  CREATED:  2021-12-02 17:13:52 CST
+
 
 import sys
 import os
