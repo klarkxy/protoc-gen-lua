@@ -36,7 +36,7 @@ cmd = f"{PROTOC} --plugin=protoc-gen-lua={PROTOC_GEN_LUA} --lua_out={LUA_OUT_PAT
 print(cmd)
 os.system(cmd)
 
-EXAMPLE_PATH = os.path.join(LUA_OUT_PATH, "example")
+EXAMPLE_PATH = os.path.join(LUA_OUT_PATH, "examples")
 real_files = []
 for root, dirs, files in os.walk(EXAMPLE_PATH):
     for file in files:
