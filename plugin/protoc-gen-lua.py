@@ -85,6 +85,7 @@ def GetLuaModuleVariable(file_name : str) -> str:
 lua_type = {}
 proto_type = {}
 lua_desc_type = {}
+proto_map_type = {}
 
 def Declare(desc, proto_name : str, lua_name : str, lua_desc_name : str):
     lua_type[proto_name] = lua_name
@@ -98,6 +99,9 @@ def Declare(desc, proto_name : str, lua_name : str, lua_desc_name : str):
             Declare(subdesc, proto_name + "." + subdesc.name, lua_name + "." + subdesc.name, lua_desc_name + f".enum_type[{idx}]")
         for idx, subdesc in enumerate(desc.nested_type, 1):
             Declare(subdesc, proto_name + "." + subdesc.name, lua_name + "." + subdesc.name, lua_desc_name + f".nested_type[{idx}]")
+        # 检查是不是map
+        if desc.options.map_entry:
+            proto_map_type[proto_name] = desc.field
     elif isinstance(desc, descriptor_pb2.FileDescriptorProto):
         log(f"Declare File '{proto_name}' => '{lua_name}'")
         lua_type[proto_name] = lua_name
@@ -122,11 +126,65 @@ def GenerateEnum(w : Writer, enum_desc : descriptor_pb2.EnumDescriptorProto, sta
     enum_stack = [*stack, enum_desc.name]
     enum_name = '.'.join(enum_stack)
     log(f"Generate Enum '{enum_name}'")
-    w.p(f"{enum_name} = protobuf_reflect.Enum({lua_desc_type[enum_name]})")
+    w.p(f"{enum_name} = {{}}")
+    w.p(f"{enum_name}._FullName = \"{proto_type[enum_name]}\"")
+    w.p(f"{enum_name}._Descriptor = \"{lua_desc_type[enum_name]}\"")
+    w.p(f"registry.RegistEnum({enum_name})")
     for enum_value_desc in enum_desc.value:
         w.p(f"{enum_name}.{enum_value_desc.name} = {enum_value_desc.number}")
+    for enum_value_desc in enum_desc.value:
+        w.p(f"{enum_name}[{enum_value_desc.number}] = \"{proto_type[enum_name]}.{enum_value_desc.name}\"")
     w.p()
            
+def GetLuaFieldType(field : descriptor_pb2.FieldDescriptorProto) -> str:
+    field_type = ""
+    # 判断是不是map
+    if field.label == descriptor_pb2.FieldDescriptorProto.LABEL_REPEATED:
+        if field.type_name and field.type_name in proto_map_type.keys():
+            t = proto_map_type[field.type_name]
+            return f"dict<{GetLuaFieldType(t[0])}, {GetLuaFieldType(t[1])}>" 
+        else:
+            field_type = "[]"
+        
+    match field.type:
+        case descriptor_pb2.FieldDescriptorProto.TYPE_DOUBLE:
+            field_type = "number" + field_type
+        case descriptor_pb2.FieldDescriptorProto.TYPE_FLOAT:
+            field_type = "number" + field_type
+        case descriptor_pb2.FieldDescriptorProto.TYPE_INT64:
+            field_type = "number" + field_type
+        case descriptor_pb2.FieldDescriptorProto.TYPE_UINT64:
+            field_type = "number" + field_type
+        case descriptor_pb2.FieldDescriptorProto.TYPE_INT32:
+            field_type = "number" + field_type
+        case descriptor_pb2.FieldDescriptorProto.TYPE_FIXED64:
+            field_type = "number" + field_type
+        case descriptor_pb2.FieldDescriptorProto.TYPE_FIXED32:
+            field_type = "number" + field_type
+        case descriptor_pb2.FieldDescriptorProto.TYPE_BOOL:
+            field_type = "boolean" + field_type
+        case descriptor_pb2.FieldDescriptorProto.TYPE_STRING:
+            field_type = "string" + field_type
+        case descriptor_pb2.FieldDescriptorProto.TYPE_GROUP:
+            field_type = lua_type[field.type_name] + field_type
+        case descriptor_pb2.FieldDescriptorProto.TYPE_MESSAGE:
+            field_type = lua_type[field.type_name] + field_type
+        case descriptor_pb2.FieldDescriptorProto.TYPE_BYTES:
+            field_type = "string" + field_type
+        case descriptor_pb2.FieldDescriptorProto.TYPE_UINT32:
+            field_type = "number" + field_type
+        case descriptor_pb2.FieldDescriptorProto.TYPE_ENUM:
+            field_type = lua_type[field.type_name] + field_type
+        case descriptor_pb2.FieldDescriptorProto.TYPE_SFIXED32:
+            field_type = "number" + field_type
+        case descriptor_pb2.FieldDescriptorProto.TYPE_SFIXED64:
+            field_type = "number" + field_type
+        case descriptor_pb2.FieldDescriptorProto.TYPE_SINT32:
+            field_type = "number" + field_type
+        case descriptor_pb2.FieldDescriptorProto.TYPE_SINT64:
+            field_type = "number" + field_type
+    return field_type
+    
 def AnnotateMessage(w : Writer, message_desc : descriptor_pb2.DescriptorProto, stack : list[str]):
     message_stack = [*stack, message_desc.name]
     message_name = '.'.join(message_stack)
@@ -139,49 +197,9 @@ def AnnotateMessage(w : Writer, message_desc : descriptor_pb2.DescriptorProto, s
         AnnotateMessage(w, nested_desc, message_stack)
     # 生成当前的结构
     with w.sub(prefix="---") as c:
-        c.p("@class ", message_name)
+        c.p(f"@class {message_name} : protobuf.Message")
         for field_desc in message_desc.field:
-            field_type = ""
-            match field_desc.type:
-                case descriptor_pb2.FieldDescriptorProto.TYPE_DOUBLE:
-                    field_type = "number"
-                case descriptor_pb2.FieldDescriptorProto.TYPE_FLOAT:
-                    field_type = "number"
-                case descriptor_pb2.FieldDescriptorProto.TYPE_INT64:
-                    field_type = "number"
-                case descriptor_pb2.FieldDescriptorProto.TYPE_UINT64:
-                    field_type = "number"
-                case descriptor_pb2.FieldDescriptorProto.TYPE_INT32:
-                    field_type = "number"
-                case descriptor_pb2.FieldDescriptorProto.TYPE_FIXED64:
-                    field_type = "number"
-                case descriptor_pb2.FieldDescriptorProto.TYPE_FIXED32:
-                    field_type = "number"
-                case descriptor_pb2.FieldDescriptorProto.TYPE_BOOL:
-                    field_type = "boolean"
-                case descriptor_pb2.FieldDescriptorProto.TYPE_STRING:
-                    field_type = "string"
-                case descriptor_pb2.FieldDescriptorProto.TYPE_GROUP:
-                    field_type = lua_type[field_desc.type_name]
-                case descriptor_pb2.FieldDescriptorProto.TYPE_MESSAGE:
-                    field_type = lua_type[field_desc.type_name]
-                case descriptor_pb2.FieldDescriptorProto.TYPE_BYTES:
-                    field_type = "string"
-                case descriptor_pb2.FieldDescriptorProto.TYPE_UINT32:
-                    field_type = "number"
-                case descriptor_pb2.FieldDescriptorProto.TYPE_ENUM:
-                    field_type = lua_type[field_desc.type_name]
-                case descriptor_pb2.FieldDescriptorProto.TYPE_SFIXED32:
-                    field_type = "number"
-                case descriptor_pb2.FieldDescriptorProto.TYPE_SFIXED64:
-                    field_type = "number"
-                case descriptor_pb2.FieldDescriptorProto.TYPE_SINT32:
-                    field_type = "number"
-                case descriptor_pb2.FieldDescriptorProto.TYPE_SINT64:
-                    field_type = "number"
-            if field_desc.label == descriptor_pb2.FieldDescriptorProto.LABEL_REPEATED:
-                field_type += "[]"
-            c.p(f"@field {field_desc.name} {field_type}")
+            c.p(f"@field {field_desc.name} {GetLuaFieldType(field_desc)}")
     w.p()
 
   
@@ -195,8 +213,11 @@ def GenerateMessage(w : Writer, message_desc : descriptor_pb2.DescriptorProto, s
     # 生成所有的内置Message
     for nested_desc in message_desc.nested_type:
         GenerateMessage(w, nested_desc, message_stack)
-    w.p(f"---@type fun():{message_name} @New a '{proto_type[message_name]}'")
-    w.p(f"{message_name} = protobuf_reflect.Message({lua_desc_type[message_name]})")
+    w.p(f"---@type fun():{message_name}")
+    w.p(f"{message_name} = protobuf.Message({lua_desc_type[message_name]})")
+    w.p(f"{message_name}._FullName = \"{proto_type[message_name]}\"")
+    w.p(f"{message_name}._Descriptor = \"{lua_desc_type[message_name]}\"")
+    w.p(f"registry.RegistMessage({message_name})")
     w.p()
 
 def GenerateLua(file_desc : descriptor_pb2.FileDescriptorProto) -> str:
@@ -207,7 +228,8 @@ def GenerateLua(file_desc : descriptor_pb2.FileDescriptorProto) -> str:
     log(f"Generate File '{file_desc.name}'")
     w = Writer()
     # 引用protoc-gen-lua的库文件
-    w.p("local protobuf_reflect = require \"protobuf.reflect\"")
+    w.p("local protobuf = require \"protobuf.protobuf\"")
+    w.p("local registry = require \"protobuf.registry\"")
     w.p("")
     # 引用其他proto
     for dependency in file_desc.dependency:

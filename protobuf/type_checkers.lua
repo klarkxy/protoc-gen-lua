@@ -16,25 +16,9 @@
 --------------------------------------------------------------------------------
 --
 
-local type = type
-local error = error
-local string = string
+local checkers = {}
 
-module "protobuf.type_checkers"
-
-function TypeChecker(acceptable_types)
-    local acceptable_types = acceptable_types
-
-    return function(proposed_value)
-        local t = type(proposed_value)
-        if acceptable_types[type(proposed_value)] == nil then
-            error(string.format('%s has type %s, but expected one of: %s', 
-                proposed_value, type(proposed_value), acceptable_types))
-        end
-    end
-end
-
-function Int32ValueChecker()
+checkers.Int32ValueChecker = function ()
     local _MIN = -2147483648
     local _MAX = 2147483647
     return function(proposed_value)
@@ -48,7 +32,7 @@ function Int32ValueChecker()
     end
 end
 
-function Uint32ValueChecker(IntValueChecker)
+checkers.Uint32ValueChecker = function ()
     local _MIN = 0
     local _MAX = 0xffffffff
 
@@ -63,10 +47,12 @@ function Uint32ValueChecker(IntValueChecker)
     end
 end
 
-function UnicodeValueChecker()
+checkers.UnicodeValueChecker = function ()
     return function (proposed_value)
         if type(proposed_value) ~= 'string' then
             error(string.format('%s has type %s, but expected one of: string', proposed_value, type(proposed_value)))
         end
     end
 end
+
+return checkers

@@ -16,18 +16,6 @@
 --------------------------------------------------------------------------------
 --
 
-local setmetatable = setmetatable
-local rawset = rawset
-local rawget = rawget
-local error = error
-local ipairs = ipairs
-local pairs = pairs
-local print = print
-local table = table 
-local string = string
-local tostring = tostring
-local type = type
-
 local pb = require "pb"
 local wire_format = require "protobuf.wire_format"
 local type_checkers = require "protobuf.type_checkers"
@@ -39,95 +27,10 @@ local descriptor = require "protobuf.descriptor"
 local FieldDescriptor = descriptor.FieldDescriptor
 local text_format = require "protobuf.text_format"
 
-module("protobuf.protobuf")
+local registry = require "protobuf.registry"
+local struct = require "protobuf.struct"
 
-local function make_descriptor(name, descriptor, usable_key)
-    local meta = {
-        __newindex = function(self, key, value)
-            if usable_key[key] then
-                rawset(self, key, value)
-            else
-                error("error key: "..key)
-            end
-        end
-    };
-    meta.__index = meta
-    meta.__call = function()
-        return setmetatable({}, meta)
-    end
-
-    _M[name] = setmetatable(descriptor, meta);
-end
-
-
-make_descriptor("Descriptor",  {}, {
-    name = true,
-    full_name = true,
-    filename = true,
-    containing_type = true,
-    fields = true,
-    nested_types = true,
-    enum_types = true,
-    extensions = true,
-    options = true,
-    is_extendable = true,
-    extension_ranges = true,
-})
-
-make_descriptor("FieldDescriptor", FieldDescriptor, {
-    name = true,
-    full_name = true,
-    index = true,
-    number = true,
-    type = true,
-    cpp_type = true,
-    label = true,
-    has_default_value = true,
-    default_value = true,
-    containing_type = true,
-    message_type = true,
-    enum_type = true,
-    is_extension = true,
-    extension_scope = true,
-})
-
-make_descriptor("EnumDescriptor", {}, {
-    name = true,
-    full_name = true,
-    values = true,
-    containing_type  = true,
-    options = true
-})
-
-make_descriptor("EnumValueDescriptor", {}, {
-    name = true,
-    index = true,
-    number = true,
-    type = true,
-    options = true
-})
-
--- Maps from field type to expected wiretype.
-local FIELD_TYPE_TO_WIRE_TYPE = {
-    [FieldDescriptor.TYPE_DOUBLE] = wire_format.WIRETYPE_FIXED64,
-    [FieldDescriptor.TYPE_FLOAT] = wire_format.WIRETYPE_FIXED32,
-    [FieldDescriptor.TYPE_INT64] = wire_format.WIRETYPE_VARINT,
-    [FieldDescriptor.TYPE_UINT64] = wire_format.WIRETYPE_VARINT,
-    [FieldDescriptor.TYPE_INT32] = wire_format.WIRETYPE_VARINT,
-    [FieldDescriptor.TYPE_FIXED64] = wire_format.WIRETYPE_FIXED64,
-    [FieldDescriptor.TYPE_FIXED32] = wire_format.WIRETYPE_FIXED32,
-    [FieldDescriptor.TYPE_BOOL] = wire_format.WIRETYPE_VARINT,
-    [FieldDescriptor.TYPE_STRING] = wire_format.WIRETYPE_LENGTH_DELIMITED,
-    [FieldDescriptor.TYPE_GROUP] = wire_format.WIRETYPE_START_GROUP,
-    [FieldDescriptor.TYPE_MESSAGE] = wire_format.WIRETYPE_LENGTH_DELIMITED,
-    [FieldDescriptor.TYPE_BYTES] = wire_format.WIRETYPE_LENGTH_DELIMITED,
-    [FieldDescriptor.TYPE_UINT32] = wire_format.WIRETYPE_VARINT,
-    [FieldDescriptor.TYPE_ENUM] = wire_format.WIRETYPE_VARINT,
-    [FieldDescriptor.TYPE_SFIXED32] = wire_format.WIRETYPE_FIXED32,
-    [FieldDescriptor.TYPE_SFIXED64] = wire_format.WIRETYPE_FIXED64,
-    [FieldDescriptor.TYPE_SINT32] = wire_format.WIRETYPE_VARINT,
-    [FieldDescriptor.TYPE_SINT64] = wire_format.WIRETYPE_VARINT
-}
+local protobuf = {}
 
 local NON_PACKABLE_TYPES = {
     [FieldDescriptor.TYPE_STRING] = true,
@@ -146,28 +49,6 @@ local _VALUE_CHECKERS = {
     [FieldDescriptor.CPPTYPE_BOOL] = type_checkers.TypeChecker({boolean = true, bool = true, int=true}),
     [FieldDescriptor.CPPTYPE_ENUM] = type_checkers.Int32ValueChecker(),
     [FieldDescriptor.CPPTYPE_STRING] = type_checkers.TypeChecker({string = true})
-}
-
-
-local TYPE_TO_BYTE_SIZE_FN = {
-    [FieldDescriptor.TYPE_DOUBLE] = wire_format.DoubleByteSize,
-    [FieldDescriptor.TYPE_FLOAT] = wire_format.FloatByteSize,
-    [FieldDescriptor.TYPE_INT64] = wire_format.Int64ByteSize,
-    [FieldDescriptor.TYPE_UINT64] = wire_format.UInt64ByteSize,
-    [FieldDescriptor.TYPE_INT32] = wire_format.Int32ByteSize,
-    [FieldDescriptor.TYPE_FIXED64] = wire_format.Fixed64ByteSize,
-    [FieldDescriptor.TYPE_FIXED32] = wire_format.Fixed32ByteSize,
-    [FieldDescriptor.TYPE_BOOL] = wire_format.BoolByteSize,
-    [FieldDescriptor.TYPE_STRING] = wire_format.StringByteSize,
-    [FieldDescriptor.TYPE_GROUP] = wire_format.GroupByteSize,
-    [FieldDescriptor.TYPE_MESSAGE] = wire_format.MessageByteSize,
-    [FieldDescriptor.TYPE_BYTES] = wire_format.BytesByteSize,
-    [FieldDescriptor.TYPE_UINT32] = wire_format.UInt32ByteSize,
-    [FieldDescriptor.TYPE_ENUM] = wire_format.EnumByteSize,
-    [FieldDescriptor.TYPE_SFIXED32] = wire_format.SFixed32ByteSize,
-    [FieldDescriptor.TYPE_SFIXED64] = wire_format.SFixed64ByteSize,
-    [FieldDescriptor.TYPE_SINT32] = wire_format.SInt32ByteSize,
-    [FieldDescriptor.TYPE_SINT64] = wire_format.SInt64ByteSize
 }
 
 local TYPE_TO_ENCODER = {
@@ -292,46 +173,6 @@ local function _DefaultValueConstructorForField(field)
     end
     return function (message)
         return field.default_value
-    end
-end
-
-local function _AttachFieldHelpers(message_meta, field_descriptor)
-    local is_repeated = (field_descriptor.label == FieldDescriptor.LABEL_REPEATED)
-    local is_packed = (field_descriptor.has_options and field_descriptor.GetOptions().packed)
-
-    rawset(field_descriptor, "_encoder", TYPE_TO_ENCODER[field_descriptor.type](field_descriptor.number, is_repeated, is_packed))
-    rawset(field_descriptor, "_sizer", TYPE_TO_SIZER[field_descriptor.type](field_descriptor.number, is_repeated, is_packed))
-    rawset(field_descriptor, "_default_constructor", _DefaultValueConstructorForField(field_descriptor))
-
-    local AddDecoder = function(wiretype, is_packed)
-        local tag_bytes = encoder.TagBytes(field_descriptor.number, wiretype)
-        message_meta._decoders_by_tag[tag_bytes] = TYPE_TO_DECODER[field_descriptor.type](field_descriptor.number, is_repeated, is_packed, field_descriptor, field_descriptor._default_constructor)
-    end
-  
-    AddDecoder(FIELD_TYPE_TO_WIRE_TYPE[field_descriptor.type], False)
-    if is_repeated and IsTypePackable(field_descriptor.type) then
-        AddDecoder(wire_format.WIRETYPE_LENGTH_DELIMITED, True)
-    end
-end
-
-local function _AddEnumValues(descriptor, message_meta)
-    for _, enum_type in ipairs(descriptor.enum_types) do
-        for _, enum_value in ipairs(enum_type.values) do
-            message_meta._member[enum_value.name] = enum_value.number
-        end
-    end
-end
-
-local function _InitMethod(message_meta)
-    return function()
-        local self = {}
-        self._cached_byte_size = 0
-        self._cached_byte_size_dirty = false
-        self._fields = {}
-        self._is_present_in_parent = false
-        self._listener = listener_mod.NullMessageListener()
-        self._listener_for_children = listener_mod.Listener(self) 
-        return setmetatable(self, message_meta)
     end
 end
 
@@ -879,7 +720,7 @@ end
 
 local function property_getter(message_meta)
     local getter = message_meta._getter
-    local member = message_meta._member
+    local member = message_meta._default
 	
     return function (self, property)
 		local g = getter[property]
@@ -904,57 +745,85 @@ local function property_setter(message_meta)
 	end
 end
 
-function _AddClassAttributesForNestedExtensions(descriptor, message_meta)
-    local extension_dict = descriptor._extensions_by_name
-    for extension_name, extension_field in pairs(extension_dict) do
-        message_meta._member[extension_name] = extension_field
-    end
+---往meta里增加一个普通field的方法
+---@param field google_protobuf_descriptor_pb.FieldDescriptorProto
+---@param meta table
+local _AddFieldMethod = function (field, meta)
+    
 end
 
-local function Message(descriptor)
-    local message_meta = {}
-    message_meta._decoders_by_tag = {}
-    rawset(descriptor, "_extensions_by_name", {})
-    for _, k in ipairs(descriptor.extensions) do
-        descriptor._extensions_by_name[k.name] = k
+---往meta里增加一个map的方法
+---@param field google_protobuf_descriptor_pb.FieldDescriptorProto
+---@param meta table
+local _AddMapFieldMethod = function (field, meta)
+    meta._setter[field.name] = function (self, value)
+        
     end
-    rawset(descriptor, "_extensions_by_number", {})
-    for _, k in ipairs(descriptor.extensions) do
-        descriptor._extensions_by_number[k.number] = k
-    end
-    message_meta._descriptor = descriptor
-    message_meta._extensions_by_name = {}
-    message_meta._extensions_by_number = {}
+end
+---往meta里增加一个repeated的方法
+---@param field google_protobuf_descriptor_pb.FieldDescriptorProto
+---@param meta table
+local _AddRepeatedFieldMethod = function (field, meta)
+    
+end
 
-    message_meta._getter = {}
-    message_meta._setter = {}
-    message_meta._member = {}
---    message_meta._name = descriptor.full_name
-
-    local ns = setmetatable({}, message_meta._member)
-    message_meta._member.__call = _InitMethod(message_meta)
-    message_meta._member.__index = message_meta._member 
-    message_meta._member.type = ns
-
-    if rawget(descriptor, "_concrete_class") == nil then
-        rawset(descriptor, "_concrete_class", ns)
-        for k, field in ipairs(descriptor.fields) do  
-            _AttachFieldHelpers(message_meta, field)
+---往meta里增加每个字段的方法
+---@param descriptor google_protobuf_descriptor_pb.DescriptorProto
+---@param meta table
+local _AddFieldsMethod = function (descriptor, meta)
+    for _, field in ipairs(descriptor.field) do
+        if field.label == [[LABEL_REPEATED]] then
+            -- 如果是map，一定会生成一个额外的message
+            local is_map = false
+            if field.type == [[TYPE_MESSAGE]] then
+                local sub_message = registry.message[field.type_name]
+                if sub_message._Descriptor.options.map_entry then
+                    is_map = true
+                end
+            end
+            if is_map then
+                _AddMapFieldMethod(field, meta)
+            else
+                _AddRepeatedFieldMethod(field, meta)
+            end
+        else
+            _AddFieldMethod(field, meta)
         end
     end
-    _AddEnumValues(descriptor, message_meta)
-    _AddClassAttributesForNestedExtensions(descriptor, message_meta)
-    _AddPropertiesForFields(descriptor, message_meta)
-    _AddPropertiesForExtensions(descriptor, message_meta)
-    _AddStaticMethods(message_meta)
-    _AddMessageMethods(descriptor, message_meta)
-    _AddPrivateHelperMethods(message_meta)
-
-    message_meta.__index = property_getter(message_meta)
-    message_meta.__newindex = property_setter(message_meta) 
-
-    return ns 
 end
 
-_M.Message = Message
+---@class protobuf.Message
+---@field ParseFromString fun(self, s:string)
+---@field SerializeToString fun(self, s:string)
 
+---@param descriptor google_protobuf_descriptor_pb.DescriptorProto
+---@return fun():protobuf.Message
+protobuf.Message = function (descriptor)
+    local factory = {}
+    local meta = {}
+    meta._descriptor = descriptor
+    
+    meta._getter = {}
+    meta._setter = {}
+    meta._default = {}
+
+    -- 对每一个字段添加对应的方法
+    _AddFieldsMethod(descriptor, meta)
+
+    _AddPropertiesForFields(descriptor, meta)
+    _AddPropertiesForExtensions(descriptor, meta)
+    _AddStaticMethods(meta)
+    _AddMessageMethods(descriptor, meta)
+    _AddPrivateHelperMethods(meta)
+
+    meta.__index = property_getter(meta)
+    meta.__newindex = property_setter(meta) 
+
+    factory.__call = function ()
+        local default = {}
+        return setmetatable(default, meta)
+    end
+    return setmetatable({}, factory)
+end
+
+return protobuf
