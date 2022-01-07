@@ -749,7 +749,9 @@ end
 ---@param field google_protobuf_descriptor_pb.FieldDescriptorProto
 ---@param meta table
 local _AddFieldMethod = function (field, meta)
-    
+    meta._setter[field.name] = function (self, value)
+        
+    end
 end
 
 ---往meta里增加一个map的方法
@@ -764,7 +766,9 @@ end
 ---@param field google_protobuf_descriptor_pb.FieldDescriptorProto
 ---@param meta table
 local _AddRepeatedFieldMethod = function (field, meta)
-    
+    meta._setter[field.name] = function (self, value)
+        
+    end
 end
 
 ---往meta里增加每个字段的方法
