@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!python3
 # -*- encoding:utf8 -*-
 # protoc-gen-erl
 # Google's Protocol Buffers project, ported to lua.
@@ -14,8 +14,8 @@ import sys
 import os
 from io import StringIO
 
-import protoc.include.google.protobuf.compiler.plugin_pb2 as plugin_pb2
-import protoc.include.google.protobuf.descriptor_pb2 as descriptor_pb2
+import google.protobuf.compiler.plugin_pb2 as plugin_pb2
+import google.protobuf.descriptor_pb2 as descriptor_pb2
 
 import logging
 
@@ -438,8 +438,7 @@ def code_gen_file(proto_file: descriptor_pb2.FileDescriptorProto, env: TreeNode,
         logging.debug(enum_desc)
         code_gen_enum(enum_desc, env)
         for enum_value in enum_desc.value:
-            env.message.append('%s = %d\n' % (enum_value.name,
-                                              enum_value.number))
+            env.message.append('%s = %d\n' % (enum_value.name, enum_value.number))
 
     for msg_desc in proto_file.message_type:
         logging.debug(msg_desc)
@@ -483,8 +482,7 @@ if __name__ == "__main__":
 
     env = Env()
     for proto_file in code_gen_req.proto_file:
-        code_gen_file(proto_file, env,
-                      proto_file.name in code_gen_req.file_to_generate)
+        code_gen_file(proto_file, env, proto_file.name in code_gen_req.file_to_generate)
 
     code_generated = plugin_pb2.CodeGeneratorResponse()
     for k in _files:

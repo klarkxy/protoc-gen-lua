@@ -9,7 +9,7 @@ PROTOC = os.path.join(PROTOC_DIR_PATH, "bin", "protoc")
 if sys.platform == "win32":
     PROTOC_GEN_LUA = os.path.join(PWD, "protoc-gen-lua.bat")
 else:
-    PROTOC_GEN_LUA = os.path.join(PWD, "protoc-gen-lua")
+    PROTOC_GEN_LUA = os.path.join(PWD, "protoc-gen-lua.sh")
 
 real_files = []
 for root, dirs, files in os.walk(INCLUDE_PATH):

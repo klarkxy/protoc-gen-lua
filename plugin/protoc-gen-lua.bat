@@ -1,1 +1,1 @@
-@python %~dp0protoc-gen-lua
+@python %~dp0protoc-gen-lua.py

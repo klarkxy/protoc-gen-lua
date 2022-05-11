@@ -4,3 +4,4 @@
 __pycache__
 
 plugin/protoc
+plugin/log.txt
